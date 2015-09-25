@@ -29,7 +29,7 @@ signalR.hub('blueApp',{
                     {
                         Message : "Test statement A",
                         User : "user1",
-                        Timestamp: new Date();
+                        Timestamp: new Date()
                     },
                     {
                         Message : "Test statement B",
