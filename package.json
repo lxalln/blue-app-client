@@ -19,5 +19,8 @@
   "devDependencies": {
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.5"
   }
 }

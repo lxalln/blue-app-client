@@ -5,13 +5,6 @@ var http = require('http').Server(app);
 var exphbs      = require('express-handlebars');
 var helpers = require('./modules/helpers');
 
-http.createServer(function(req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, "localhost");
-
-console.log('Server running at http://localhost:1337/');
-
 var config      = require('./modules/config');
 var logger      = require('./modules/Logger');
 
