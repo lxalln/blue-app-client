@@ -12,6 +12,10 @@ var logger      = require('./modules/Logger');
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'main', helpers:helpers}));
 app.set('view engine', '.hbs');
 
+app.get('/client', function(req,res) {
+  res.sendfile('client.html');
+});
+
 require('./controller/index.js')(app);
 
 http.listen(5000, function(){
