@@ -34,12 +34,12 @@
 
                     for(var i = 0; i < statements.length; i++){
                         var statement = statements[i];
-                        var html = '<h1>' + statement.message + '</h1>';
-                        html += '</br>';
-                        html += '<h3>' + statement.user + '</h3>';
-                        html += '</br>';
-                        html += '<h5>' + statement.timestamp + '</h5>';
-                        html += '</br>';
+
+                        console.log(statement);
+
+                        var html = '<h1>' + statement["Message"] + '</h1>';
+                        html += '<h3>' + statement["User"] + '</h3>';
+                        html += '<h5>' + statement["Timestamp"] + '</h5>';
                         html += '</hr>';
                         html += '</br>';
 
