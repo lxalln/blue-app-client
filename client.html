@@ -27,7 +27,7 @@
             //connection.url = 'http://blue-app-server.azurewebsites.net/signalr';
             console.log(connection.url);
 
-            $('#connect').click(function()){
+            $('#connect').click(function(){
                 connection.start()
                 .done(function () {
                     console.log('Connected to signalR');
