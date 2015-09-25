@@ -27,10 +27,6 @@ signalR.hub('blueApp',{
 console.log('Creating signalR listener');
 app.use(signalR.createListener());
 
-signalR.on('CONNECTED',function(){
-	console.log('connected');
-})
-
 // end signalR server
 
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'main', helpers:helpers}));
@@ -44,4 +40,8 @@ require('./controller/index.js')(app);
 
 http.listen(process.env.PORT, function(){
   logger.pipe('Server started via "http" and listening on 5000.', 'success');
+});
+
+signalR.on('CONNECTED',function(){
+	console.log('connected');
 });
