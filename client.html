@@ -22,6 +22,30 @@
 
             blueApp.client.onPrivateMessage = function (fromUserName, message) {
                 console.log('Received message from ' + fromUserName + ': ' + message);
+
+                var message = JSON.parse(message);
+
+                var type = message.type;
+
+                if(fromUserName == 'server' && type == 'init'){
+                    var statements = message.statements;
+
+                    var statementsBox = $('#statements-box');
+
+                    for(var i = 0; i < statements.length; i++){
+                        var statement = statements[i];
+                        var html = '<h1>' + statement.message + '</h1>';
+                        html += '</br>';
+                        html += '<h3>' + statement.user + '</h3>';
+                        html += '</br>';
+                        html += '<h5>' + statement.timestamp + '</h5>';
+                        html += '</br>';
+                        html += '</hr>';
+                        html += '</br>';
+
+                        statements.append(html);
+                    }
+                }
             };
 
             //connection.url = 'http://blue-app-server.azurewebsites.net/signalr';
@@ -46,7 +70,14 @@
                         var sendTo = $('#sendto').val();
                         var message = $('#message').val();
 
-                        console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + message);
+                        var transmission = {
+                            type: 'chat',
+                            message: message
+                        };
+
+                        var transmissionString = JSON.stringify(transmission);
+
+                        console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + transmissionString);
 
                         //Call the hub server send
                         blueApp.server.sendToUser(userName, sendTo, message);
@@ -72,6 +103,9 @@
         Message : <input type="text" id="message"/>
         </br>
         <input type="button" id="sendmessage" value="Send" />
+    </div>
+
+    <div id="statements-box">
     </div>
 </body>
 </html>

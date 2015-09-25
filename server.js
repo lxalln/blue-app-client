@@ -25,6 +25,7 @@ signalR.hub('blueApp',{
 	sendToUser : function(fromUserName, toUserName, message){
         if(toUserName == 'server' && message == 'init'){
             var state = {
+                type: 'init',
                 statements: [
                     {
                         Message : "Test statement A",
