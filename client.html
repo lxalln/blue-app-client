@@ -7,39 +7,67 @@
     <script src="signalr/hubs"></script>
     <script type="text/javascript">
         $(function () {
+            $('#message-box').hide();
             console.log('Connecting to blueApp');
 
             //Create hub connection
             var connection = $.connection.hub;
-            var chatHub = $.connection.blueApp;
-            chatHub.logging = true;
+            var blueApp = $.connection.blueApp;
+            blueApp.logging = true;
 
             //Handle a broadcast
-            chatHub.client.broadcast = function (broadcastMessage) {
-                console.log(broadcastMessage);
+            blueApp.client.broadcast = function (broadcastMessage) {
+                console.log("Received broadcast: " + broadcastMessage);
+            };
+
+            blueApp.client.onPrivateMessage = function (fromUserName, message) {
+                console.log('Received message from ' + fromUserName + ': ' + message);
             };
 
             //connection.url = 'http://blue-app-server.azurewebsites.net/signalr';
             console.log(connection.url);
 
-            connection.start()
-            .done(function () {
-                console.log('Connected to signalR');
-                $('#sendmessage').click(function () {
-                    console.log('Attempting push to signalR');
-                    //Call the hub server send
-                    chatHub.server.send('A Message from ' + $('#username').val());
+            $('#connect').click(function()){
+                connection.start()
+                .done(function () {
+                    console.log('Connected to signalR');
+
+                    $('#connect-box').hide();
+                    $('#message-box').show();
+
+                    $.connection.$user($('#username').val());
+
+                    $('#sendmessage').click(function () {
+                        console.log('Attempting push to signalR');
+
+                        var userName = $('#username').val();
+                        var sendTo = $('#sendto').val();
+                        var message = $('#nessage').val();
+
+                        //Call the hub server send
+                        blueApp.server.sendToUser(userName, sendTo, message);
+                    });
+                })
+                .fail(function(error){
+                    console.log('Could not connect');
+                    console.log(error);
                 });
-            })
-            .fail(function(error){
-                console.log('Could not connect');
-                console.log(error)
             });
         });
     </script>
 </head>
 <body>
-    <input type="text" id="username"/>
-    <input type="button" id="sendmessage" value="Send" />
+    <div id="connect-box">
+        Username: <input type="text" id="username"/>
+        </br>
+        <input type="button" id="connect" value="Connect"/>
+    </div>
+    <div id="message-box">
+        To: <input type="text" id="sendto"/>
+        </br>
+        Message : <input type="text" id="message"/>
+        </br>
+        <input type="button" id="sendmessage" value="Send" />
+    </div>
 </body>
 </html>

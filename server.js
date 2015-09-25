@@ -18,10 +18,14 @@ var signalR = SignalRJS();
 //Create the hub connection
 //NOTE: Server methods are defined as an object on the second argument
 signalR.hub('blueApp',{
-    send : function(userName,message){
-        this.clients.all.invoke('broadcast').withArgs([userName,message])
-        console.log('send:'+message);
-    }
+    broadcast : function(fromUserName, message){
+		this.clients.all.invoke('broadcast').withArgs([fromUserName,message])
+		console.log('broadcasting:'+message);
+	},
+	sendToUser : function(fromUserName, toUserName, message){
+		this.clients.user(toUserName).invoke('onPrivateMessage').withArgs([fromUserName,message])
+		console.log('sendToUser from('+fromUserName+') to('+toUserName+') message:'+message);
+	}
 });
 
 console.log('Creating signalR listener');
@@ -36,7 +40,7 @@ app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use(express.static('public'));
 
 app.get('/client', function(req,res) {
-  res.sendfile('client.html');
+  res.sendFile('client.html');
 });
 
 require('./controller/index.js')(app);
