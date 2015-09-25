@@ -34,7 +34,7 @@ signalR.hub('blueApp',{
                     {
                         Message : "Test statement B",
                         User: "user2",
-                        Timestamp: new Date().setMinutes(new Date().getMinutes() + 20)
+                        Timestamp: new Date(new Date().getTime() + (20*60*1000))
                     }
                 ]
             }
