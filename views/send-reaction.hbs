@@ -1,0 +1,30 @@
+<div class="statement">
+  <div class="media">
+    <div class="media-left">
+      <img class="media-object" src="{{statement.image}}" alt="profile pic">
+    </div>
+    <div class="media-body">
+      <p>{{statement.statement}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="emoji-reactions">
+  {{#each emojis}}
+  <div class="emoji-reaction">
+    <img class="emoji-reaction-icon" src="{{this.image}}" alt="heart">
+  </div>
+  {{/each}}
+</div>
+
+<div class="encouragements">
+  {{#each encouragements}}
+  <div class="encouragement">{{this}}</div>
+  {{/each}}
+</div>
+
+<div class="message">
+  <form>
+    <textarea></textarea>
+  </form>
+</div>

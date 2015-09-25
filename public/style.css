@@ -1,0 +1,32 @@
+.statement {
+  padding: 10px;
+}
+.media-object {
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+}
+
+.emoji-reactions {
+  padding: 10px;
+}
+.emoji-reaction {
+  padding: 8px 10px;
+  background-color: #eee;
+  border-radius: 2px;
+  display: inline-block;
+}
+.emoji-reaction-icon {
+  width: 20px;
+}
+
+.encouragements {
+  padding: 5px 10px;
+}
+.encouragement {
+  padding: 8px 10px;
+  background-color: #eee;
+  border-radius: 2px;
+  margin: 5px 0;
+  display: inline-block;
+}
