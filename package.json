@@ -21,6 +21,7 @@
     "express-handlebars": "^2.0.1"
   },
   "dependencies": {
-    "bootstrap": "^3.3.5"
+    "bootstrap": "^3.3.5",
+    "signalrjs": "^0.2.2"
   }
 }
