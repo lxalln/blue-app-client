@@ -35,14 +35,16 @@
                     $('#connect-box').hide();
                     $('#message-box').show();
 
-                    $.connection.$user($('#username').val());
+                    var userName = $('#username').val();
+                    $.connection.$user(userName);
+
+                    console.log('Connected as ' + userName);
 
                     $('#sendmessage').click(function () {
-                        console.log('Attempting push to signalR');
-
-                        var userName = $('#username').val();
                         var sendTo = $('#sendto').val();
-                        var message = $('#nessage').val();
+                        var message = $('#message').val();
+
+                        console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + message);
 
                         //Call the hub server send
                         blueApp.server.sendToUser(userName, sendTo, message);
