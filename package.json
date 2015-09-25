@@ -1,0 +1,22 @@
+{
+  "name": "blue-app-client",
+  "version": "0.0.0",
+  "description": "Blue app for zone hackathon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lxalln/blue-app-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lxalln/blue-app-client/issues"
+  },
+  "homepage": "https://github.com/lxalln/blue-app-client",
+  "devDependencies": {
+    "handlebars": "^4.0.3"
+  }
+}
