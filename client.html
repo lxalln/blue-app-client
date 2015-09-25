@@ -112,7 +112,7 @@
 
                         var transmissionString = JSON.stringify(transmission);
 
-                        console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + transmissionString);
+                        console.log('Broadcasting statement from ' + userName + ': ' + transmissionString);
 
                         //Call the hub server send
                         blueApp.server.broadcast(userName, message);
