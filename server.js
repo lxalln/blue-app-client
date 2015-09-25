@@ -15,6 +15,23 @@ var logger      = require('./modules/Logger');
 // Init SignalRJs
 var signalR = SignalRJS();
 
+// hack hack hack!
+
+signalR.poll = function(req,res){
+	var self = this;
+	var token = req.signalrjs.token;
+	this._connectionManager.updateConnection(req.signalrjs.token,res);
+	setTimeout(function(){
+		var connection = self._connectionManager.getByToken(token);
+        if(typeof(connection) === 'undefined'){
+            return;
+        }
+		var transport = self._transports[connection.type];
+		if(transport)
+			transport.send(connection.connection,[]);
+	},30000);
+};
+
 var state = {
     type: 'init',
     statements: [
