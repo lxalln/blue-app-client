@@ -6,3 +6,6 @@ http.createServer(function(req, res) {
 }).listen(1337, "localhost");
 
 console.log('Server running at http://localhost:1337/');
+
+var config      = require('./modules/config');
+var logger      = require('./modules/Logger');
