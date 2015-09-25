@@ -40,7 +40,7 @@ app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use(express.static('public'));
 
 app.get('/client', function(req,res) {
-  res.sendFile('client.html');
+  res.sendfile('client.html');
 });
 
 require('./controller/index.js')(app);
