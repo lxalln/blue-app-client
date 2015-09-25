@@ -35,7 +35,7 @@
             var statementsBox = $('#statements-box');
 
             //Handle a broadcast
-            blueApp.client.broadcast = function (broadcastMessage) {
+            blueApp.client.broadcast = function (fromUserName, message) {
                 var type = message.type;
 
                 if(type == 'statement'){
