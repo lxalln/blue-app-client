@@ -30,3 +30,7 @@
   margin: 5px 0;
   display: inline-block;
 }
+
+.message {
+  padding: 10px;
+}
