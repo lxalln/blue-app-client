@@ -1,5 +1,6 @@
 var express = require('express');
 var app     = express();
+var SignalRJS = require('signalrjs');
 var http = require('http').Server(app);
 
 var exphbs      = require('express-handlebars');
@@ -8,6 +9,29 @@ var helpers = require('./modules/helpers');
 var config      = require('./modules/config');
 var logger      = require('./modules/Logger');
 
+
+// signalR server
+
+// Init SignalRJs
+var signalR = SignalRJS();
+
+//Create the hub connection
+//NOTE: Server methods are defined as an object on the second argument
+signalR.hub('blueApp',{
+    send : function(userName,message){
+        this.clients.all.invoke('broadcast').withArgs([userName,message])
+        console.log('send:'+message);
+    }
+});
+
+console.log('Creating signalR listener');
+app.use(signalR.createListener());
+
+signalR.on('CONNECTED',function(){
+	console.log('connected');
+})
+
+// end signalR server
 
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'main', helpers:helpers}));
 app.set('view engine', '.hbs');
