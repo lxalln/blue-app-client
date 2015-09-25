@@ -46,8 +46,10 @@ app.get('/client', function(req,res) {
 require('./controller/index.js')(app);
 require('./controller/send-reaction.js')(app);
 
-http.listen('5000', function(){
-  logger.pipe('Server started via "http" and listening on 5000.', 'success');
+var port = process.env.port || 5000;
+
+http.listen(port, function(){
+  logger.pipe('Server started via "http" and listening on ' + port, 'success');
 });
 
 signalR.on('CONNECTED',function(){
