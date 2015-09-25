@@ -32,9 +32,17 @@
             var blueApp = $.connection.blueApp;
             blueApp.logging = true;
 
+            var statementsBox = $('#statements-box');
+
             //Handle a broadcast
             blueApp.client.broadcast = function (broadcastMessage) {
-                console.log("Received broadcast: " + broadcastMessage);
+                var type = message.type;
+
+                if(type == 'statement'){
+                    var statement = message.statement;
+
+                    renderStatement(statement, statementsBox, true);
+                }
             };
 
             blueApp.client.onPrivateMessage = function (fromUserName, message) {
@@ -47,19 +55,10 @@
                 if(fromUserName == 'server' && type == 'init'){
                     var statements = message.statements;
 
-                    var statementsBox = $('#statements-box');
-
                     for(var i = 0; i < statements.length; i++){
                         var statement = statements[i];
 
                         renderStatement(statement, statementsBox);
-                    }
-                }
-                else{
-                    if(type == 'statement'){
-                        var statement = message.statement;
-
-                        renderStatement(statement, statementsBox, true);
                     }
                 }
             };
@@ -100,7 +99,6 @@
                     });
 
                     $('#broadcastMessage').click(function () {
-                        var sendTo = $('#sendto').val();
                         var message = $('#message').val();
 
                         var transmission = {
@@ -117,7 +115,7 @@
                         console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + transmissionString);
 
                         //Call the hub server send
-                        blueApp.server.broadcast(userName, sendTo, message);
+                        blueApp.server.broadcast(userName, message);
                     });
                 })
                 .fail(function(error){
