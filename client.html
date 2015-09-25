@@ -115,7 +115,7 @@
                         console.log('Broadcasting statement from ' + userName + ': ' + transmissionString);
 
                         //Call the hub server send
-                        blueApp.server.broadcast(userName, message);
+                        blueApp.server.broadcast(userName, transmissionString);
                     });
                 })
                 .fail(function(error){
