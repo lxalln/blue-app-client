@@ -40,6 +40,8 @@
 
                     console.log('Connected as ' + userName);
 
+                    blueApp.server.sendToUser(userName, 'server', 'init');
+
                     $('#sendmessage').click(function () {
                         var sendTo = $('#sendto').val();
                         var message = $('#message').val();

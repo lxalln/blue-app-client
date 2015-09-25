@@ -23,7 +23,30 @@ signalR.hub('blueApp',{
 		console.log('broadcasting:'+message);
 	},
 	sendToUser : function(fromUserName, toUserName, message){
-		this.clients.user(toUserName).invoke('onPrivateMessage').withArgs([fromUserName,message])
+        if(toUserName == 'server' && message == 'init'){
+            var state = {
+                statements = [
+                    {
+                        Message : "Test statement A",
+                        User : "user1",
+                        Timestamp: new Date();
+                    },
+                    {
+                        Message : "Test statement B",
+                        User: "user2",
+                        Timestamp: new Date().setMinutes(new Date().getMinutes() + 20)
+                    }
+                ]
+            }
+
+            var stateString = JSON.stringify(state);
+
+            this.clients.user(fromUserName).invoke('onPrivateMessage').withArgs(['server', stateString])
+        }
+        else{
+            this.clients.user(toUserName).invoke('onPrivateMessage').withArgs([fromUserName,message])
+        }
+
 		console.log('sendToUser from('+fromUserName+') to('+toUserName+') message:'+message);
 	}
 });
