@@ -1,4 +1,9 @@
-var http = require('http');
+var express = require('express');
+var app     = express();
+var http = require('http').Server(app);
+
+var exphbs      = require('express-handlebars');
+var helpers = require('./modules/helpers');
 
 http.createServer(function(req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -9,3 +14,13 @@ console.log('Server running at http://localhost:1337/');
 
 var config      = require('./modules/config');
 var logger      = require('./modules/Logger');
+
+
+app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'main', helpers:helpers}));
+app.set('view engine', '.hbs');
+
+require('./controller/index.js')(app);
+
+http.listen(5000, function(){
+  logger.pipe('Server started via "http" and listening on 5000.', 'success');
+});
