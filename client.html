@@ -28,7 +28,7 @@
                 $('#sendmessage').click(function () {
                     console.log('Attempting push to signalR');
                     //Call the hub server send
-                    chatHub.server.send('A Message from ' + $('#username'));
+                    chatHub.server.send('A Message from ' + $('#username').val());
                 });
             })
             .fail(function(error){
