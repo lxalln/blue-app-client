@@ -19,7 +19,7 @@ var signalR = SignalRJS();
 //NOTE: Server methods are defined as an object on the second argument
 signalR.hub('blueApp',{
     broadcast : function(fromUserName, message){
-		this.clients.all.invoke('broadcast').withArgs([fromUserName,message])
+		this.clients.all.invoke('onTransmit').withArgs([fromUserName,message])
 		console.log('broadcasting:'+message);
 	},
 	sendToUser : function(fromUserName, toUserName, message){
@@ -42,10 +42,10 @@ signalR.hub('blueApp',{
 
             var stateString = JSON.stringify(state);
 
-            this.clients.user(fromUserName).invoke('onPrivateMessage').withArgs(['server', stateString])
+            this.clients.user(fromUserName).invoke('onTransmit').withArgs(['server', stateString])
         }
         else{
-            this.clients.user(toUserName).invoke('onPrivateMessage').withArgs([fromUserName,message])
+            this.clients.user(toUserName).invoke('onTransmit').withArgs([fromUserName,message])
         }
 
 		console.log('sendToUser from('+fromUserName+') to('+toUserName+') message:'+message);

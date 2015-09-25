@@ -34,18 +34,7 @@
 
             var statementsBox = $('#statements-box');
 
-            //Handle a broadcast
-            blueApp.client.broadcast = function (fromUserName, message) {
-                var type = message.type;
-
-                if(type == 'statement'){
-                    var statement = message.statement;
-
-                    renderStatement(statement, statementsBox, true);
-                }
-            };
-
-            blueApp.client.onPrivateMessage = function (fromUserName, message) {
+            blueApp.client.onTransmit = function (fromUserName, message) {
                 console.log('Received message from ' + fromUserName + ': ' + message);
 
                 var message = JSON.parse(message);
@@ -59,6 +48,13 @@
                         var statement = statements[i];
 
                         renderStatement(statement, statementsBox);
+                    }
+                }
+                else{
+                    if(type == 'statement'){
+                        var statement = message.statement;
+
+                        renderStatement(statement, statementsBox, true);
                     }
                 }
             };
