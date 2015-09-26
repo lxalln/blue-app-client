@@ -22,6 +22,10 @@
 
         var username = store.get('username');
 
+        if(!username){
+            window.location = '/';
+        }
+
         console.log('Connecting to blueApp');
 
         //Create hub connection
@@ -69,7 +73,7 @@
 
             $.connection.$user(username);
 
-            console.log('Connected as ' + userName);
+            console.log('Connected as ' + username);
 
             blueApp.server.sendToUser(userName, 'server', 'init');
 
@@ -84,10 +88,10 @@
 
                 var transmissionString = JSON.stringify(transmission);
 
-                console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + transmissionString);
+                console.log('Sending message from ' + username + ' to ' + sendTo + ': ' + transmissionString);
 
                 //Call the hub server send
-                blueApp.server.sendToUser(userName, sendTo, message);
+                blueApp.server.sendToUser(username, sendTo, message);
             });
 
             $('#broadcastMessage').click(function () {
@@ -97,17 +101,17 @@
                     type: 'statement',
                     statement: {
                         Message : message,
-                        User : userName,
+                        User : username,
                         Timestamp: new Date()
                     }
                 };
 
                 var transmissionString = JSON.stringify(transmission);
 
-                console.log('Broadcasting statement from ' + userName + ': ' + transmissionString);
+                console.log('Broadcasting statement from ' + username + ': ' + transmissionString);
 
                 //Call the hub server send
-                blueApp.server.broadcast(userName, transmissionString);
+                blueApp.server.broadcast(username, transmissionString);
             });
         })
         .fail(function(error){
