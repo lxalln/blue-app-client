@@ -7,11 +7,8 @@
         var source   = $("#statement-template").html();
         var template = Handlebars.compile(source);
 
-console.log(template);
 console.log(statement);
-        var html = template({
-            "message" : "TESTING!"
-        });
+        var html = template(statement);
 
         console.log(html);
 
@@ -137,7 +134,7 @@ console.log(statement);
   {{/each}}
 </div>
 
-<div style="display:none" id="statement-template">
+<script id="statement-template" type="text/x-handlebars-template">
     <div class="statement">
       <a class="media" href="/send-reaction/{{id}}">
         <div class="media-left">
@@ -158,4 +155,4 @@ console.log(statement);
         {{/if}}
         </a>
     </div>
-</div>
+</script>
