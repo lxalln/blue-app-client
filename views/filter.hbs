@@ -1,11 +1,12 @@
 <ul id="my_friends">
 </ul>
 
+<a class="btn btn-default btn-import" href="/feed">Continue</a>
+
 <script>
 
   function fbLogout() {
       FB.logout(function (response) {
-          //Do what ever you want here when logged out like reloading the page
           window.location.reload();
       });
   }
