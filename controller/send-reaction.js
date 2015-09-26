@@ -1,4 +1,5 @@
 var logger     = require('../modules/Logger');
+var store      = require('../public/scripts/store.min.js');
 
 module.exports = function(app)
 {
