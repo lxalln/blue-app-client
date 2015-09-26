@@ -17,7 +17,7 @@ function generateUUID() {
         return (c=='x' ? r : (r&0x3|0x8)).toString(16);
     });
     return uuid;
-};
+}
 
 // signalR server
 
@@ -57,7 +57,7 @@ var state = {
             Timestamp: new Date(new Date().getTime() + (20*60*1000))
         }
     ]
-}
+};
 
 //Create the hub connection
 //NOTE: Server methods are defined as an object on the second argument
@@ -73,17 +73,17 @@ signalR.hub('blueApp',{
             state.statements.unshift(statement);
         }
 
-		this.clients.all.invoke('onTransmit').withArgs([fromUserName,message])
+		this.clients.all.invoke('onTransmit').withArgs([fromUserName,message]);
 		console.log('broadcasting:'+message);
 	},
 	sendToUser : function(fromUserName, toUserName, message){
         if(toUserName == 'server' && message == 'init'){
             var stateString = JSON.stringify(state);
 
-            this.clients.user(fromUserName).invoke('onTransmit').withArgs(['server', stateString])
+            this.clients.user(fromUserName).invoke('onTransmit').withArgs(['server', stateString]);
         }
         else{
-            this.clients.user(toUserName).invoke('onTransmit').withArgs([fromUserName,message])
+            this.clients.user(toUserName).invoke('onTransmit').withArgs([fromUserName,message]);
         }
 		console.log('sendToUser from('+fromUserName+') to('+toUserName+') message:'+message);
 	}

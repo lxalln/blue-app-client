@@ -1,15 +1,9 @@
-<ul id="my_friends">
+<ul id="my_friends" class="list-group">
 </ul>
 
 <a class="btn btn-default btn-import" href="/feed">Continue</a>
 
 <script>
-
-  function fbLogout() {
-      FB.logout(function (response) {
-          window.location.reload();
-      });
-  }
 
   //Connect to Facebook asynchroniously
   window.fbAsyncInit = function() {
@@ -34,7 +28,7 @@
         if (typeof(my_friends) !== 'undefined') {
           $('#my_friends').html = '';
           $.each(my_friends['friends'], function( index, value ) {
-              $('#my_friends').append('<li id="'+value['id']+'">'+value['firstName']+' ' +value['lastName'] + '</li>');
+              $('#my_friends').append('<li class="list-group-item" id="'+value['id']+'"><div class="profile-pic" style="background-image:url(images/profiles/pic'+(index+1)+'.jpg)"></div>'+value['firstName']+' ' +value['lastName'] + '<div class="add-friend glyphicon glyphicon-plus-sign"></div></li>');
           });
         }
       });

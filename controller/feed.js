@@ -5,37 +5,37 @@ module.exports = function(app)
     app.get('/feed', function(req, res) {
       var statements = [
         {
-          image: '', 
+          image: '',
           statement: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
           emojiCount: 0,
           messageCount: 1
         },
         {
-          image: '', 
+          image: '',
           statement: 'Donec ullamcorper nulla non metus auctor fringilla.',
           emojiCount: 3,
-          messageCount: 0 
+          messageCount: 0
         },
         {
-          image: '', 
+          image: '',
           statement: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
           emojiCount: 2,
           messageCount: 1
         },
         {
-          image: '', 
+          image: '',
           statement: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.',
           emojiCount: 0,
           messageCount: 4
         },
         {
-          image: '', 
+          image: '',
           statement: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum.',
           emojiCount: 6,
           messageCount: 2
         },
         {
-          image: '', 
+          image: '',
           statement: 'Cras mattis consectetur purus sit amet fermentum.',
           emojiCount: 0,
           messageCount: 0
@@ -55,14 +55,14 @@ module.exports = function(app)
           } else {
             statements[i].messageCount = false;
           }
-        };
-      };
+        }
+      }
 
       filterData(statements);
 
       var data = {
         statements: statements
-      }
+      };
 
       res.render('feed', data);
     });
