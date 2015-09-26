@@ -91,13 +91,9 @@ require('./controller/import.js')(app);
 require('./controller/send-reaction.js')(app);
 require('./controller/filter.js')(app);
 require('./controller/feed.js')(app);
-<<<<<<< HEAD
 require('./controller/statements.js')(app);
-=======
 require('./controller/chat.js')(app);
 require('./controller/statement.js')(app);
-
->>>>>>> d84b16551ff714a43cc98e85cdc28257bff19aee
 var port = process.env.port || 5000;
 
 http.listen(port, function(){
