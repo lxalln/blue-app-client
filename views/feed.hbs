@@ -136,6 +136,8 @@ console.log(statement);
 
                 //Call the hub server send
                 blueApp.server.broadcast(username, transmissionString);
+
+                $('#message').val('');
             });
         })
         .fail(function(error){

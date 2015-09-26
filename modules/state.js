@@ -9,7 +9,7 @@ module.exports = {
             user : "user1",
             timestamp: new Date(),
             emojiCount: 0,
-            messagecount: 0
+            messageCount: 0
         },
         {
             id : helpers.generateUUID(),
