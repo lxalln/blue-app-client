@@ -127,6 +127,7 @@ filterData(state.statements);
           return;
       }
 
+      console.log(statement);
       res.render('statement', statement);
     });
 };
