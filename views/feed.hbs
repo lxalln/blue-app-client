@@ -4,11 +4,10 @@
     function renderStatement(statement, container, prepend){
         console.log(statement);
 
-        var html = '<h1><a href="/send-reaction/' + statement["Id"] + '">' + statement["Message"] + '</a></h1>';
-        html += '<h3>' + statement["User"] + '</h3>';
-        html += '<h5>' + statement["Timestamp"] + '</h5>';
-        html += '</hr>';
-        html += '</br>';
+        var source   = $("#statement-template").html();
+        var template = Handlebars.compile(source);
+
+        var html = template(statement);
 
         if(prepend){
             container.prepend(html);
@@ -130,4 +129,27 @@
   {{#each statements}}
     {{> statement}}
   {{/each}}
+</div>
+
+<div style="display:none">
+    <div id="statement-template" class="statement">
+      <a class="media" href="/send-reaction/{{this.id}}">
+        <div class="media-left">
+          <div class="media-object"></div>
+        </div>
+        <div class="media-body">
+          <p>{{this.message}}</p>
+        </div>
+        {{#if this.emojiCount}}
+          <div class="has-emoji">
+            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+          </div>
+        {{/if}}
+        {{#if this.messageCount}}
+          <div class="has-message">
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+          </div>
+        {{/if}}
+        </a>
+    </div>
 </div>
