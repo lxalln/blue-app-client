@@ -60,61 +60,59 @@
 
         console.log(connection.url);
 
-        $('#connect').click(function(){
-            connection.start()
-            .done(function () {
-                console.log('Connected to signalR');
+        connection.start()
+        .done(function () {
+            console.log('Connected to signalR');
 
-                $('#connect-box').hide();
-                $('#message-box').show();
+            $('#connect-box').hide();
+            $('#message-box').show();
 
-                $.connection.$user(username);
+            $.connection.$user(username);
 
-                console.log('Connected as ' + userName);
+            console.log('Connected as ' + userName);
 
-                blueApp.server.sendToUser(userName, 'server', 'init');
+            blueApp.server.sendToUser(userName, 'server', 'init');
 
-                $('#sendmessage').click(function () {
-                    var sendTo = $('#sendto').val();
-                    var message = $('#message').val();
+            $('#sendmessage').click(function () {
+                var sendTo = $('#sendto').val();
+                var message = $('#message').val();
 
-                    var transmission = {
-                        type: 'chat',
-                        message: message
-                    };
+                var transmission = {
+                    type: 'chat',
+                    message: message
+                };
 
-                    var transmissionString = JSON.stringify(transmission);
+                var transmissionString = JSON.stringify(transmission);
 
-                    console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + transmissionString);
+                console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + transmissionString);
 
-                    //Call the hub server send
-                    blueApp.server.sendToUser(userName, sendTo, message);
-                });
-
-                $('#broadcastMessage').click(function () {
-                    var message = $('#message').val();
-
-                    var transmission = {
-                        type: 'statement',
-                        statement: {
-                            Message : message,
-                            User : userName,
-                            Timestamp: new Date()
-                        }
-                    };
-
-                    var transmissionString = JSON.stringify(transmission);
-
-                    console.log('Broadcasting statement from ' + userName + ': ' + transmissionString);
-
-                    //Call the hub server send
-                    blueApp.server.broadcast(userName, transmissionString);
-                });
-            })
-            .fail(function(error){
-                console.log('Could not connect');
-                console.log(error);
+                //Call the hub server send
+                blueApp.server.sendToUser(userName, sendTo, message);
             });
+
+            $('#broadcastMessage').click(function () {
+                var message = $('#message').val();
+
+                var transmission = {
+                    type: 'statement',
+                    statement: {
+                        Message : message,
+                        User : userName,
+                        Timestamp: new Date()
+                    }
+                };
+
+                var transmissionString = JSON.stringify(transmission);
+
+                console.log('Broadcasting statement from ' + userName + ': ' + transmissionString);
+
+                //Call the hub server send
+                blueApp.server.broadcast(userName, transmissionString);
+            });
+        })
+        .fail(function(error){
+            console.log('Could not connect');
+            console.log(error);
         });
     });
 </script>
