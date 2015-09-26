@@ -94,9 +94,54 @@ app.get('/client', function(req,res) {
 
 app.post('/react', function(req, res){
     console.log('received reaction');
-    console.log(req.body);
-    console.log(req.body.type);
-    console.log(req.body.data);
+
+	console.log(req.body);
+	console.log(req.body.type);
+	console.log(req.body.data);
+
+	var type = req.body.type;
+	var data = req.body.data;
+	var id = req.body.id;
+
+	var statement;
+	for(var i = 0; i < state.statements.length; i++){
+		var loopingStatement = state.statements[i];
+
+		console.log('Comparing: ');
+		console.log(loopingStatement);
+
+		if(loopingStatement.id == id){
+			statement = loopingStatement;
+			break;
+		}
+	}
+
+	if(statement){
+		if(type == 'emoji'){
+			if(!statement.encouragements){
+				statement.encouragements = [];
+			}
+
+			statement.emojiCount += 1;
+			statement.emoji.push(data);
+		}
+		else if (type == 'encouragement'){
+			if(!statement.encouragements){
+				statement.encouragements = [];
+			}
+
+			statement.messageCount += 1;
+			statement.encouragements.push(data);
+		}
+		else{
+			if(!statement.messages){
+				statement.messages = [];
+			}
+
+			statement.messageCount += 1;
+			statement.messages.push(data);
+		}
+	}
 });
 
 require('./controller/sign-in.js')(app);

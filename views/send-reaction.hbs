@@ -11,7 +11,7 @@
                 message = $(this).data('name');
             }
             else if(type == 'encouragement'){
-                message = $(this).innerHtml();
+                message = $(this).html();
             }
             else{
                 message = $('#reaction-message').val();
@@ -21,6 +21,7 @@
               type: "POST",
               url: '/react',
               data: {
+                  id: statementId,
                   type: type,
                   data: message
               },
