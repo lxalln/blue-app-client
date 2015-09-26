@@ -7,6 +7,7 @@ module.exports = function(app)
       for (var i = 0, x = statements.length; i < x; i++) {
           var statement = statements[i];
 
+          console.log(statement.emoji);
           if(typeof(statement.emoji) !== 'undefined'){
               var distinctEmoji = [];
               var emoji = {};
@@ -96,7 +97,6 @@ module.exports = function(app)
       }
     }
 
-filterData(state.statements);
     app.get('/statement/:id', function(req, res) {
         var id = req.params.id;
 
@@ -108,7 +108,7 @@ filterData(state.statements);
             return;
         }
 
-        var statements = state.statements;
+        var statements = filterData(state.statements);
 
         console.log('Looking for Id: ' + id);
         var statement;
