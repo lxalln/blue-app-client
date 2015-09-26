@@ -2,7 +2,7 @@ var logger = require('../modules/Logger');
 
 module.exports = function(app)
 {
-    app.get('/statement/:id', function(req, res) {
+    app.get('/statement', function(req, res) {
       var data = {
         id: '',
         image: '',

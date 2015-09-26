@@ -10,9 +10,27 @@
 <section id="your-statements">
 
 <div id='statements-box' class="statements">
-  {{#each statements}}
-    {{> statement}}
-  {{/each}}
+{{#each statements}}
+  <a href="/statement"><div class="statement">
+    <div class="media">
+      <div class="media-body">
+        <p>{{statement}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="emoji-reactions" style="padding:0px 10px;">
+    {{#each emojis}}
+    <div class="emoji-reaction">
+      <img class="emoji-reaction-icon" src="{{this.image}}" alt="heart">
+      <span class="emoji-count">{{this.count}}</span>
+    </div>
+    {{/each}}
+  </div>
+</a>
+<hr style="margin:10px 0px 0px;">
+{{/each}}
+
 </div>
 
 </section>
