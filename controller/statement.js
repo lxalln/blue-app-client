@@ -64,7 +64,7 @@ module.exports = function(app)
                   });
               }
 
-              statement.encuragementHash = hash;
+              statement.encouragementsHash = hash;
           }
 
           if(typeof(statement.messages) !== 'undefined'){
@@ -73,7 +73,7 @@ module.exports = function(app)
               for(j = 0; j < statement.messages.length; j++){
                 var currentMessage = statement.messages[j];
                 if(typeof(messages[currentMessage]) === 'undefined'){
-                    messagesmessages[currentMessage] = 1;
+                    messages[currentMessage] = 1;
                     distinctMessages.push(currentMessage);
                 }
                 else{
