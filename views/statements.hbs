@@ -9,62 +9,19 @@
 
 <section id="your-statements">
 
-    <div class="statements">
-      {{#each statements}}
-        <div class="statement">
-          <div class="media">
-            <div class="media-body">
-              <p>{{statement}}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="emoji-reactions">
-          {{#each emojis}}
-          <div class="emoji-reaction">
-            <img class="emoji-reaction-icon" src="{{this.image}}" alt="heart">
-            <span class="emoji-count">{{this.count}}</span>
-          </div>
-          {{/each}}
-        </div>
-
-        <div class="encouragements">
-          {{#each encouragements}}
-          <div class="encouragement">
-            {{this.value}}
-            <span class="encouragement-count">{{this.count}}</span>
-          </div>
-          {{/each}}
-        </div>
-      {{/each}}
-    </div>
+<div id='statements-box' class="statements">
+  {{#each statements}}
+    {{> statement}}
+  {{/each}}
+</div>
 
 </section>
 
 <section id="reactions" style="display:none;">
-  <div class="statements">
-    {{#each reactions}}
-      <div class="statement">
-        <div class="media">
-          <div class="media-left">
-            <div class="media-object"></div>
-          </div>
-          <div class="media-body">
-            <p>{{this.message}}</p>
-          </div>
-          {{#if this.emojiCount}}
-            <div class="emoji-count">
-              <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-            </div>
-          {{/if}}
-          {{#if this.messageCount}}
-            <div class="message-count">
-              <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-            </div>
-          {{/if}}
-        </div>
-      </div>
-    {{/each}}
+  <div class="reactions">
+  {{#each reactions}}
+    {{> statement}}
+  {{/each}}
   </div>
 </section>
 

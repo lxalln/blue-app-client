@@ -2,7 +2,7 @@ var logger = require('../modules/Logger');
 
 module.exports = function(app)
 {
-    app.get('/statement', function(req, res) {
+    app.get('/statement/:id', function(req, res) {
       var data = {
         id: '',
         image: '',
@@ -21,7 +21,7 @@ module.exports = function(app)
           {value: 'Hello there stay strong please', sender: ''},
           {value: 'I know how you feel, I was in the same situation some time ago', sender: ''}
         ]
-      }
+      };
       res.render('statement', data);
     });
 };
