@@ -1,5 +1,5 @@
 var logger     = require('../modules/Logger');
-var state = require('./modules/state');
+var state = require('../modules/state');
 
 module.exports = function(app)
 {
