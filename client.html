@@ -9,7 +9,7 @@
         function renderStatement(statement, container, prepend){
             console.log(statement);
 
-            var html = '<h1>' + statement["Message"] + '</h1>';
+            var html = '<h1><a href="/send-reaction/' + statement["Id"] + '">' + statement["Message"] + '</a></h1>';
             html += '<h3>' + statement["User"] + '</h3>';
             html += '<h5>' + statement["Timestamp"] + '</h5>';
             html += '</hr>';
@@ -60,8 +60,6 @@
                         renderStatement(statement, statementsBox, true);
                     }
                 }
-
-                store.set('state', state);
             };
 
             console.log(connection.url);
