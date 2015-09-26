@@ -20,6 +20,9 @@ header {
 .statement {
   padding: 20px 10px;
 }
+.media {
+  color: #000;
+}
 .media-object {
   width: 64px;
   height: 64px;
