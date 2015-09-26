@@ -4,16 +4,28 @@ module.exports = {
     type: 'init',
     statements: [
         {
-            Id : helpers.generateUUID(),
-            Message : "Test statement A",
-            User : "user1",
-            Timestamp: new Date()
+            id : helpers.generateUUID(),
+            message : "Test statement A",
+            user : "user1",
+            timestamp: new Date(),
+            emojiCount: 42,
+            messagecount: 12
         },
         {
-            Id : helpers.generateUUID(),
-            Message : "Test statement B",
-            User: "user2",
-            Timestamp: new Date(new Date().getTime() + (20*60*1000))
+            id : helpers.generateUUID(),
+            message : "Test statement B",
+            user: "user2",
+            timestamp: new Date(new Date().getTime() + (10*60*1000)),
+            emojiCount: 2,
+            messageCount: 17
+        },
+        {
+            id : helpers.generateUUID(),
+            message : "Test statement C",
+            user: "user1",
+            timestamp: new Date(new Date().getTime() + (20*60*1000)),
+            emojiCount: 2,
+            messageCount: 1
         }
     ]
 };

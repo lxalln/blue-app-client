@@ -42,7 +42,7 @@ signalR.hub('blueApp',{
         if(json.type == 'statement'){
             var statement = json.statement;
 
-            statement.Id = helpers.generateUUID();
+            statement.id = helpers.generateUUID();
 
             state.statements.unshift(statement);
         }
