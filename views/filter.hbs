@@ -1,0 +1,55 @@
+<ul id="my_friends">
+</ul>
+
+<script>
+
+  function fbLogout() {
+      FB.logout(function (response) {
+          //Do what ever you want here when logged out like reloading the page
+          window.location.reload();
+      });
+  }
+
+  //Connect to Facebook asynchroniously
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '941121332608123',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+
+    FB.getLoginStatus(function(response) {
+    if (response.status === 'connected') {
+      FB.api('/me/friends', {fields: 'id,name'}, function(response) {
+        var my_friends = {
+          "friends":[
+              {"firstName":"John", "lastName":"Doe", "id":1001 },
+              {"firstName":"Anna",	"lastName":"Smith", "id":1002 },
+              {"firstName":"Peter", "lastName":"Jones", "id":1003 },
+              {"firstName":"Damon", "lastName":"Albarn", "id":1004 },
+              {"firstName":"Mr.", "lastName":"Bean", "id":1005 }
+          ]
+        };
+        if (typeof(my_friends) !== 'undefined') {
+          $('#my_friends').html = '';
+          //console.log(my_friends);
+          $.each(my_friends['friends'], function( index, value ) {
+            //$.each( value, function( key, val ) {
+              console.log(value);
+              $('#my_friends').append('<li id="'+value['id']+'">'+value['firstName']+' ' +value['lastName'] + '</li>');
+            //});
+          });
+        }
+      });
+    }
+  });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+</script>

@@ -6,7 +6,7 @@ module.exports = function(app)
       var statement = {
         image: 'images/profile-pic.jpg',
         statement: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.'
-      }
+      };
 
       var emojis = [
         // TODO: add more emojis
@@ -21,7 +21,7 @@ module.exports = function(app)
         statement: statement,
         emojis: emojis,
         encouragements: encouragements
-      }
+      };
       res.render('send-reaction', data);
     });
 };

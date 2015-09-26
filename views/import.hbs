@@ -1,0 +1,33 @@
+
+
+<a href="https://www.facebook.com/dialog/oauth?client_id=941121332608123&redirect_uri=http://blueapp.dev:5000/filter&auth_type=rerequest&scope=user_friends">login</a>
+
+
+<span id="fbLogout" onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout</span></a></span>
+
+<script>
+
+  function fbLogout() {
+      FB.logout(function (response) {
+          //Do what ever you want here when logged out like reloading the page
+          window.location.reload();
+      });
+  }
+
+  //Connect to Facebook asynchroniously
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '941121332608123',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+</script>

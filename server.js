@@ -19,11 +19,11 @@ var signalR = SignalRJS();
 //NOTE: Server methods are defined as an object on the second argument
 signalR.hub('blueApp',{
     broadcast : function(fromUserName, message){
-		this.clients.all.invoke('broadcast').withArgs([fromUserName,message])
+		this.clients.all.invoke('broadcast').withArgs([fromUserName,message]);
 		console.log('broadcasting:'+message);
 	},
 	sendToUser : function(fromUserName, toUserName, message){
-		this.clients.user(toUserName).invoke('onPrivateMessage').withArgs([fromUserName,message])
+		this.clients.user(toUserName).invoke('onPrivateMessage').withArgs([fromUserName,message]);
 		console.log('sendToUser from('+fromUserName+') to('+toUserName+') message:'+message);
 	}
 });
@@ -44,7 +44,10 @@ app.get('/client', function(req,res) {
 });
 
 require('./controller/index.js')(app);
+require('./controller/import.js')(app);
 require('./controller/send-reaction.js')(app);
+require('./controller/filter.js')(app);
+
 
 http.listen('5000', function(){
   logger.pipe('Server started via "http" and listening on 5000.', 'success');
