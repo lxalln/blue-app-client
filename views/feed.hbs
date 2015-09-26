@@ -121,11 +121,11 @@
 <div class="message">
   <div class="form-group">
     <input id="message" type="text" class="form-control">
-    <button id='broadcastMessage' type="submit" class="btn btn-primary">Connecting...</button>
+    <input id='broadcastMessage' type="submit" class="btn btn-primary" value='Connecting...'/>
   </div>
 </div>
 
-<div id='#statements-box' class="statements">
+<div id='statements-box' class="statements">
   {{#each statements}}
     {{> statement}}
   {{/each}}
