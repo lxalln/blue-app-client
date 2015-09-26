@@ -8,71 +8,94 @@ module.exports = function(app)
           var statement = statements[i];
 
           if(typeof(statement.emoji) !== 'undefined'){
+              var distinctEmoji = [];
               var emoji = {};
               for(j = 0; j < statement.emoji.length; j++){
                 var currentEmoji = statement.emoji[j];
                 if(typeof(emoji[currentEmoji]) === 'undefined'){
                     emoji[currentEmoji] = 1;
+                    distinctEmoji.push(currentEmoji);
                 }
                 else{
                     emoji[currentEmoji] = emoji[currentEmoji] + 1;
                 }
               }
 
-              statement.emojiHash = emoji;
+              var hash = [];
+              for(var k = 0; k < distinctEmoji.length; k++){
+                  var currentEmoji = distinctEmoji[k];
+                  var count = emoji[currentEmoji];
+
+                  hash.push({
+                      name: currentEmoji,
+                      count: count
+                  });
+              }
+
+              statement.emojiHash = hash;
           }
 
           if(typeof(statement.encouragements) !== 'undefined'){
+              var distinctEncouragements = [];
               var encouragements = {};
               for(j = 0; j < statement.encouragements.length; j++){
                 var currentEncouragement = statement.encouragements[j];
                 if(typeof(encouragements[currentEncouragement]) === 'undefined'){
                     encouragements[currentEncouragement] = 1;
+                    distinctEncouragements.push(currentEncouragement);
                 }
                 else{
                     encouragements[currentEncouragement] = encouragements[currentEncouragement] + 1;
                 }
               }
-            statement.encuragementHash = encouragements;
+
+              var hash = [];
+              for(var k = 0; k < distinctEncouragements.length; k++){
+                  var currentEncouragement = distinctEncouragements[k];
+                  var count = encouragements[currentEncouragement];
+
+                  hash.push({
+                      name: currentEncouragement,
+                      count: count
+                  });
+              }
+
+              statement.encuragementHash = hash;
           }
 
           if(typeof(statement.messages) !== 'undefined'){
+              var distinctMessages = [];
               var messages = {};
               for(j = 0; j < statement.messages.length; j++){
                 var currentMessage = statement.messages[j];
                 if(typeof(messages[currentMessage]) === 'undefined'){
                     messagesmessages[currentMessage] = 1;
+                    distinctMessages.push(currentMessage);
                 }
                 else{
                     messages[currentMessage] = messages[currentMessage] + 1;
                 }
               }
-              statement.messagesHash = messages;
+
+              var hash = [];
+              for(var k = 0; k < distinctMessages.length; k++){
+                  var currentMessage = distinctMessages[k];
+                  var count = messages[currentMessage];
+
+                  hash.push({
+                      name: currentMessage,
+                      count: count
+                  });
+              }
+
+              statement.messagesHash = hash;
           }
       }
     }
 
 filterData(state.statements);
     app.get('/statement', function(req, res) {
-      var data = {
-        id: '',
-        image: '',
-        statement: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
-        emojis: [
-          {name: 'heart', image: 'images/heart.png', count: 3},
-          {name: 'panda', image: 'images/panda.png', count: 9},
-          {name: 'fistbump', image: 'images/fistbump.png', count: 5}
-        ],
-        encouragements: [
-          {value: 'I know how you feel', count: 2},
-          {value: 'Heads up!', count: 5},
-          {value: 'Stay strong!', count: 1}
-        ],
-        messages: [
-          {value: 'Hello there stay strong please', sender: ''},
-          {value: 'I know how you feel, I was in the same situation some time ago', sender: ''}
-        ]
-      };
-      res.render('statement', data);
+
+      res.render('statement', state.statements);
     });
 };
