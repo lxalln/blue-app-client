@@ -68,7 +68,14 @@ app.use(signalR.createListener());
 
 // end signalR server
 
-app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'main', helpers:helpers}));
+app.engine('.hbs', exphbs({
+    extname: '.hbs',
+    defaultLayout: 'main',
+    helpers:helpers,
+    partialsDir: [
+        'views/partials/'
+    ]
+}));
 app.set('view engine', '.hbs');
 
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
@@ -78,12 +85,19 @@ app.get('/client', function(req,res) {
   res.sendfile('client.html');
 });
 
-require('./controller/index.js')(app);
+
+require('./controller/sign-in.js')(app);
 require('./controller/import.js')(app);
 require('./controller/send-reaction.js')(app);
 require('./controller/filter.js')(app);
 require('./controller/feed.js')(app);
+<<<<<<< HEAD
 require('./controller/statements.js')(app);
+=======
+require('./controller/chat.js')(app);
+require('./controller/statement.js')(app);
+
+>>>>>>> d84b16551ff714a43cc98e85cdc28257bff19aee
 var port = process.env.port || 5000;
 
 http.listen(port, function(){

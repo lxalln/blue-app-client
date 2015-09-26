@@ -2,6 +2,23 @@ header {
   width: 100%;
   background-color: #A9F5D0;
   height: 50px;
+  border-bottom: 4px solid #F3F781;
+  position: relative;
+  z-index: 1;
+}
+
+.splash {
+  background: #A9F5D0;
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+}
+
+.splash .btn {
+  width: 100%;
 }
 
 .statement {
@@ -20,8 +37,10 @@ header {
   background: linear-gradient(135deg, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
-.emoji-count,
-.message-count {
+
+/*on feed*/
+.has-emoji,
+.has-message {
   float: right;
   border-radius: 2px;
   width: 30px;
@@ -34,6 +53,7 @@ header {
   padding: 20px 10px;
 }
 .emoji-reaction {
+  position: relative;
   padding: 8px 10px;
   background-color: #eee;
   border-radius: 2px;
@@ -42,11 +62,23 @@ header {
 .emoji-reaction-icon {
   width: 20px;
 }
+.emoji-count,
+.encouragement-count {
+  position: absolute;
+  top: -12px;
+  right: -2px;
+  background: #FE2E64;
+  color: #fff;
+  width: 20px;
+  text-align: center;
+  border-radius: 100%;
+}
 
 .encouragements {
   padding: 15px 10px;
 }
 .encouragement {
+  position: relative;
   padding: 8px 10px;
   background-color: #eee;
   border-radius: 2px;
@@ -55,6 +87,7 @@ header {
 }
 
 .message {
+  position: relative;
   padding: 10px;
 }
 

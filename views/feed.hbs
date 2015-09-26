@@ -1,3 +1,123 @@
+<script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js" type="text/javascript"></script>
+<script src="signalr/hubs"></script>
+<script type="text/javascript">
+    function renderStatement(statement, container, prepend){
+        console.log(statement);
+
+        var html = '<h1><a href="/send-reaction/' + statement["Id"] + '">' + statement["Message"] + '</a></h1>';
+        html += '<h3>' + statement["User"] + '</h3>';
+        html += '<h5>' + statement["Timestamp"] + '</h5>';
+        html += '</hr>';
+        html += '</br>';
+
+        if(prepend){
+            container.prepend(html);
+        }
+        else{
+            container.append(html);
+        }
+    }
+
+    $(function () {
+        $('#message-box').hide();
+
+        console.log('Connecting to blueApp');
+
+        //Create hub connection
+        var connection = $.connection.hub;
+        var blueApp = $.connection.blueApp;
+        blueApp.logging = true;
+
+        var statementsBox = $('#statements-box');
+
+        blueApp.client.onTransmit = function (fromUserName, message) {
+            console.log('Received message from ' + fromUserName + ': ' + message);
+
+            var message = JSON.parse(message);
+
+            var type = message.type;
+
+            if(fromUserName == 'server' && type == 'init'){
+                var statements = message.statements;
+
+                for(var i = 0; i < statements.length; i++){
+                    var statement = statements[i];
+
+                    renderStatement(statement, statementsBox);
+                }
+            }
+            else{
+                if(type == 'statement'){
+                    var statement = message.statement;
+
+                    state.statements.unshift(statement);
+
+                    renderStatement(statement, statementsBox, true);
+                }
+            }
+        };
+
+        console.log(connection.url);
+
+        $('#connect').click(function(){
+            connection.start()
+            .done(function () {
+                console.log('Connected to signalR');
+
+                $('#connect-box').hide();
+                $('#message-box').show();
+
+                var userName = $('#username').val();
+                $.connection.$user(userName);
+
+                console.log('Connected as ' + userName);
+
+                blueApp.server.sendToUser(userName, 'server', 'init');
+
+                $('#sendmessage').click(function () {
+                    var sendTo = $('#sendto').val();
+                    var message = $('#message').val();
+
+                    var transmission = {
+                        type: 'chat',
+                        message: message
+                    };
+
+                    var transmissionString = JSON.stringify(transmission);
+
+                    console.log('Sending message from ' + userName + ' to ' + sendTo + ': ' + transmissionString);
+
+                    //Call the hub server send
+                    blueApp.server.sendToUser(userName, sendTo, message);
+                });
+
+                $('#broadcastMessage').click(function () {
+                    var message = $('#message').val();
+
+                    var transmission = {
+                        type: 'statement',
+                        statement: {
+                            Message : message,
+                            User : userName,
+                            Timestamp: new Date()
+                        }
+                    };
+
+                    var transmissionString = JSON.stringify(transmission);
+
+                    console.log('Broadcasting statement from ' + userName + ': ' + transmissionString);
+
+                    //Call the hub server send
+                    blueApp.server.broadcast(userName, transmissionString);
+                });
+            })
+            .fail(function(error){
+                console.log('Could not connect');
+                console.log(error);
+            });
+        });
+    });
+</script>
 <div class="message">
   <div class="form-group">
     <input type="text" class="form-control">
@@ -7,25 +127,6 @@
 
 <div class="statements">
   {{#each statements}}
-    <div class="statement">
-      <div class="media">
-        <div class="media-left">
-          <div class="media-object"></div>
-        </div>
-        <div class="media-body">
-          <p>{{this.message}}</p>
-        </div>
-        {{#if this.emojiCount}}
-          <div class="emoji-count">
-            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-          </div>
-        {{/if}}
-        {{#if this.messageCount}}
-          <div class="message-count">
-            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-          </div>
-        {{/if}}
-      </div>
-    </div>
+    {{> statement}}
   {{/each}}
 </div>
