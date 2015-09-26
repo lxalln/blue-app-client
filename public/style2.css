@@ -14,6 +14,7 @@
   color:#5cb85c;
   float: right;
 }
+.add-friend-selected { color: #A9F5D0; cursor:pointer; }
 
 .profile-pic {
   background-image:url(images/profiles/questionmark.jpg);
@@ -29,7 +30,7 @@
   float: right;
   width: 50%;
   margin-top: 0px;
-  font-size: 24px;
+  font-size: 18px;
   margin-right:10px;
   height: 64px;
   line-height: 64px;
@@ -37,4 +38,15 @@
 
 .clear {
   clear:both;
+}
+
+.active-tab, .list-group-item-selected {
+  background: #87e0fd; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#87e0fd), color-stop(40%,#53cbf1), color-stop(100%,#05abe0)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* IE10+ */
+  background: linear-gradient(135deg, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
