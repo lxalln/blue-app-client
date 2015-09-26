@@ -3,23 +3,23 @@
 
 <script id="statement-template" type="text/x-handlebars-template">
     <div class="statement">
-      <a class="media" href="/send-reaction/{{id}}">
+      <a class="media" href="/send-reaction/\{{id}}">
         <div class="media-left">
           <div class="media-object"></div>
         </div>
         <div class="media-body">
-          <p>{{message}}</p>
+          <p>\{{message}}</p>
         </div>
-        {{#if emojiCount}}
+        \{{#if emojiCount}}
           <div class="has-emoji">
             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
           </div>
-        {{/if}}
-        {{#if messageCount}}
+        \{{/if}}
+        \{{#if messageCount}}
           <div class="has-message">
             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
           </div>
-        {{/if}}
+        \{{/if}}
         </a>
     </div>
 </script>
