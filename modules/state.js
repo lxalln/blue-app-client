@@ -1,4 +1,4 @@
-var helpers = require('helpers');
+var helpers = require('./modules/helpers');
 
 module.exports = {
     type: 'init',
