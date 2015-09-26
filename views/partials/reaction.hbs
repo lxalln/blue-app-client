@@ -1,0 +1,20 @@
+<div class="statement" data-id="{{id}}" data-username="{{user}}">
+    <a href="/statement/{{id}}"><div class="statement">
+      <div class="media">
+        <div class="media-body">
+          <p>{{message}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="emoji-reactions" style="padding:0px 10px;">
+      {{#each emojis}}
+      <div class="emoji-reaction">
+        <img class="emoji-reaction-icon" src="{{image}}" alt="heart">
+        <span class="emoji-count">{{count}}</span>
+      </div>
+      {{/each}}
+    </div>
+  </a>
+  <hr style="margin:10px 0px 0px;">
+</div>

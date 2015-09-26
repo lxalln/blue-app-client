@@ -22,41 +22,8 @@ module.exports = function(app) {
 
       filterData(state.statements);
 
-
       var data = {
-        statements: [
-          {
-            id: '',
-            image: '',
-            statement: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
-            emojis: [
-              {name: 'heart', image: 'images/heart.png', count: 3},
-              {name: 'panda', image: 'images/panda.png', count: 9},
-              {name: 'fistbump', image: 'images/fistbump.png', count: 5}
-            ],
-            encouragements: [
-              {value: 'I know how you feel', count: 2},
-              {value: 'Heads up!', count: 5},
-              {value: 'Stay strong!', count: 1}
-            ]
-          },
-          {
-            id: '',
-            image: '',
-            statement: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
-            emojis: [
-              {name: 'heart', image: 'images/heart.png', count: 3},
-              {name: 'panda', image: 'images/panda.png', count: 9},
-              {name: 'fistbump', image: 'images/fistbump.png', count: 5}
-            ],
-            encouragements: [
-              {value: 'I know how you feel', count: 2},
-              {value: 'Heads up!', count: 5},
-              {value: 'Stay strong!', count: 1}
-            ]
-          }
-      ],
-      reactions: state.statements
+          statements: state.statements
       };
 
         res.render('statements', data);
