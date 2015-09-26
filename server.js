@@ -91,7 +91,7 @@ app.get('/client', function(req,res) {
   res.sendfile('client.html');
 });
 
-require('./controller/index.js')(app);
+require('./controller/sign-in.js')(app);
 require('./controller/send-reaction.js')(app);
 require('./controller/feed.js')(app);
 

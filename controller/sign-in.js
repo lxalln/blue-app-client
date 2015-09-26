@@ -1,8 +1,8 @@
-var logger     = require('../modules/Logger');
+var logger = require('../modules/Logger');
 
 module.exports = function(app)
 {
     app.get('/', function(req, res){
-      res.render('index');
+      res.render('sign-in');
     });
 };

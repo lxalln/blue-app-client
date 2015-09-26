@@ -2,6 +2,23 @@ header {
   width: 100%;
   background-color: #A9F5D0;
   height: 50px;
+  border-bottom: 4px solid #F3F781;
+  position: relative;
+  z-index: 1;
+}
+
+.splash {
+  background: #A9F5D0;
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+}
+
+.splash .btn {
+  width: 100%;
 }
 
 .statement {
