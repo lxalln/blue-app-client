@@ -3,12 +3,15 @@
 <script type="text/javascript">
     function renderStatement(statement, container, prepend){
         console.log('Rendering');
-        console.log(statement);
 
         var source   = $("#statement-template").html();
         var template = Handlebars.compile(source);
 
+console.log(template);
+console.log(statement);
         var html = template(statement);
+
+        console.log(html);
 
         if(prepend){
             container.prepend(html);
