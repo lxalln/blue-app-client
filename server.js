@@ -3,21 +3,13 @@ var app     = express();
 var SignalRJS = require('signalrjs');
 var http = require('http').Server(app);
 
+var state = require('./modules/state');
+
 var exphbs      = require('express-handlebars');
 var helpers = require('./modules/helpers');
 
 var config      = require('./modules/config');
 var logger      = require('./modules/Logger');
-
-function generateUUID() {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-    });
-    return uuid;
-}
 
 // signalR server
 
@@ -41,24 +33,6 @@ signalR.poll = function(req,res){
 	},30000);
 };
 
-var state = {
-    type: 'init',
-    statements: [
-        {
-            Id : generateUUID(),
-            Message : "Test statement A",
-            User : "user1",
-            Timestamp: new Date()
-        },
-        {
-            Id : generateUUID(),
-            Message : "Test statement B",
-            User: "user2",
-            Timestamp: new Date(new Date().getTime() + (20*60*1000))
-        }
-    ]
-};
-
 //Create the hub connection
 //NOTE: Server methods are defined as an object on the second argument
 signalR.hub('blueApp',{
@@ -68,7 +42,7 @@ signalR.hub('blueApp',{
         if(json.type == 'statement'){
             var statement = json.statement;
 
-            statement.Id = generateUUID();
+            statement.Id = helpers.generateUUID();
 
             state.statements.unshift(statement);
         }

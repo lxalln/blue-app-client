@@ -18,17 +18,17 @@
       FB.api('/me/friends', {fields: 'id,name'}, function(response) {
         var my_friends = {
           "friends":[
-              {"firstName":"John", "lastName":"Doe", "id":1001 },
-              {"firstName":"Anna",	"lastName":"Smith", "id":1002 },
-              {"firstName":"Peter", "lastName":"Jones", "id":1003 },
-              {"firstName":"Damon", "lastName":"Albarn", "id":1004 },
-              {"firstName":"Mr.", "lastName":"Bean", "id":1005 }
+              {"firstName":"John", "lastName":"Doe", "id":1001, "picture":"pic1.jpg" },
+              {"firstName":"Anna",	"lastName":"Smith", "id":1002, "picture":"pic2.jpg" },
+              {"firstName":"Peter", "lastName":"Jones", "id":1003, "picture":"questionmark.jpg" },
+              {"firstName":"Damon", "lastName":"Albarn", "id":1004, "picture":"pic3.jpg" },
+              {"firstName":"Mr.", "lastName":"Bean", "id":1005, "picture":"questionmark.jpg" }
           ]
         };
         if (typeof(my_friends) !== 'undefined') {
           $('#my_friends').html = '';
           $.each(my_friends['friends'], function( index, value ) {
-              $('#my_friends').append('<li class="list-group-item" id="'+value['id']+'"><div class="profile-pic" style="background-image:url(images/profiles/pic'+(index+1)+'.jpg)"></div>'+value['firstName']+' ' +value['lastName'] + '<div class="add-friend glyphicon glyphicon-plus-sign"></div></li>');
+              $('#my_friends').append('<li class="list-group-item" id="'+value['id']+'"><div class="profile-pic" style="background-image:url(images/profiles/'+value['picture']+')"></div><div class="add-friend glyphicon glyphicon-plus-sign"></div><div class="profile-name">'+value['firstName']+' ' +value['lastName'] + '</div><div class="clear"</div></li>');
           });
         }
       });
