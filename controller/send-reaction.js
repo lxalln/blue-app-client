@@ -25,7 +25,7 @@ module.exports = function(app)
             console.log('Comparing: ');
             console.log(loopingStatement);
 
-            if(loopingStatement.id == id){
+            if(loopingStatement["Id"] == id){
                 statement = loopingStatement;
                 break;
             }
