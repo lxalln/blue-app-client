@@ -118,8 +118,8 @@ app.post('/react', function(req, res){
 
 	if(statement){
 		if(type == 'emoji'){
-			if(typeof(statement.encouragements) === 'undefined'){
-				statement.encouragements = [];
+			if(typeof(statement.emoji) === 'undefined'){
+				statement.emoji = [];
 			}
 
 			statement.emojiCount += 1;
