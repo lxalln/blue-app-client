@@ -9,7 +9,7 @@ module.exports = function(app)
 
           if(typeof(statement.emoji) !== 'undefined'){
               var emoji = {};
-              for(j = 0; j < statement.emoji.length){
+              for(j = 0; j < statement.emoji.length; j++){
                 var currentEmoji = statement.emoji[j];
                 if(typeof(emoji[currentEmoji]) === 'undefined'){
                     emoji[currentEmoji] = 1;
@@ -24,7 +24,7 @@ module.exports = function(app)
 
           if(typeof(statement.encouragements) !== 'undefined'){
               var encouragements = {};
-              for(j = 0; j < statement.encouragements.length){
+              for(j = 0; j < statement.encouragements.length; j++){
                 var currentEncouragement = statement.encouragements[j];
                 if(typeof(encouragements[currentEncouragement]) === 'undefined'){
                     encouragements[currentEncouragement] = 1;
@@ -38,7 +38,7 @@ module.exports = function(app)
 
           if(typeof(statement.messages) !== 'undefined'){
               var messages = {};
-              for(j = 0; j < statement.messages.length){
+              for(j = 0; j < statement.messages.length; j++){
                 var currentMessage = statement.messages[j];
                 if(typeof(messages[currentMessage]) === 'undefined'){
                     messagesmessages[currentMessage] = 1;
