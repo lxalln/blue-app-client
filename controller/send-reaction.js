@@ -39,9 +39,9 @@ module.exports = function(app)
 
       var emojis = [
         // TODO: add more emojis
-        {name: 'heart', image: 'images/heart.png'},
-        {name: 'panda', image: 'images/panda.png'},
-        {name: 'fistbump', image: 'images/fistbump.png'}
+        {name: 'heart', image: '/images/heart.png'},
+        {name: 'panda', image: '/images/panda.png'},
+        {name: 'fistbump', image: '/images/fistbump.png'}
       ];
 
       var encouragements = ['I know how you feel', 'Heads up!', 'Stay strong!'];
