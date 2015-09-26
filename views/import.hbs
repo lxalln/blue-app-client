@@ -12,7 +12,7 @@
 <!-- NOTE This is just for testing purpuses -->
 <hr/>
 Just for testing purpuses:<br/>
-<span id="fbLogout" onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout</span></a></span>
+<span id="fbLogout" onclick="logout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout</span></a></span>
 
 <script>
 
@@ -32,13 +32,10 @@ Just for testing purpuses:<br/>
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-   function fbLogout() {
-       FB.logout(function (response) {
-
-           store.remove('username');
-           //Do what ever you want here when logged out like reloading the page
-           window.location = '/';
-       });
+   function logout() {
+       store.remove('username');
+       //Do what ever you want here when logged out like reloading the page
+       window.location = '/';
    }
 
 </script>
