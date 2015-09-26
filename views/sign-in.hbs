@@ -8,7 +8,7 @@ $(function () {
     }
 
     $('#start-journey').click(function(){
-        var username = $('#username');
+        var username = $('#username').val();
         if(username){
             store.set('username', username);
             window.location="/import";
