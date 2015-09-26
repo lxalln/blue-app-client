@@ -1,4 +1,4 @@
-var helpers = requires('helpers');
+var helpers = require('helpers');
 
 module.exports = {
     type: 'init',
