@@ -1,4 +1,4 @@
-var logger     = require('../modules/Logger');
+var logger = require('../modules/Logger');
 
 module.exports = function(app)
 {

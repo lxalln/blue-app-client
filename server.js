@@ -94,6 +94,8 @@ app.get('/client', function(req,res) {
 require('./controller/sign-in.js')(app);
 require('./controller/send-reaction.js')(app);
 require('./controller/feed.js')(app);
+require('./controller/chat.js')(app);
+require('./controller/statement.js')(app);
 
 var port = process.env.port || 5000;
 
