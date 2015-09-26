@@ -134,12 +134,12 @@
 
 <div style="display:none" id="statement-template">
     <div class="statement">
-      <a class="media" href="/send-reaction/{{id}}">
+      <a class="media" href="/send-reaction/{{statement.id}}">
         <div class="media-left">
           <div class="media-object"></div>
         </div>
         <div class="media-body">
-          <p>{{message}}</p>
+          <p>{{this.message}}</p>
         </div>
         {{#if emojiCount}}
           <div class="has-emoji">
