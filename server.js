@@ -87,7 +87,6 @@ app.get('/client', function(req,res) {
 
 
 require('./controller/sign-in.js')(app);
-require('./controller/index.js')(app);
 require('./controller/import.js')(app);
 require('./controller/send-reaction.js')(app);
 require('./controller/filter.js')(app);
