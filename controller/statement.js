@@ -95,6 +95,8 @@ module.exports = function(app)
               statement.messagesHash = hash;
           }
       }
+
+      return statements;
     }
 
     app.get('/statement/:id', function(req, res) {
