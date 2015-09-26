@@ -7,6 +7,8 @@ module.exports = function(app)
 
         var id = req.params.id;
 
+        console.log(state);
+
         if(!state){
             res.status(404)        // HTTP status 404: NotFound
             .send('Not found');
@@ -27,7 +29,7 @@ module.exports = function(app)
 
       if(!statement){
           res.status(404)        // HTTP status 404: NotFound
-          .send('Not found');
+          .send('Statement not found');
           return;
       }
 
