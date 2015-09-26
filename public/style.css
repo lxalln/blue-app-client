@@ -1,20 +1,27 @@
 header {
   width: 100%;
-  background-color: #05abe0;
+  background-color: #A9F5D0;
   height: 50px;
-  border-bottom: 4px solid #F3F781;
-  position: relative;
-  z-index: 1;
 }
 
 .splash {
   background: #A9F5D0;
   position: absolute;
-  top: 50px;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   padding: 20px;
+  border-top: 4px solid #F3F781;
+}
+.splash-heading {
+  font-family: 'Lobster', cursive;
+  text-align: center;
+  font-size: 22em;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.splash-buttons {
 }
 
 .statement {
