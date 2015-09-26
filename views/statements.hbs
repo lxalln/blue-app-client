@@ -37,10 +37,10 @@
   $(function () {
       var username = store.get('username');
 
-      $('#reactions .statement[data-username="' + username + '"]').show();
-      $('#reactions .statement[data-username!="' + username + '"]').hide();
+      $('#reactions .statement[data-username="' + username + '"]').parent().show();
+      $('#reactions .statement[data-username!="' + username + '"]').parent().hide();
 
-      $('#statements .statement[data-username="' + username + '"]').hide();
-      $('#statements .statement[data-username!="' + username + '"]').show();
+      $('#statements .statement[data-username="' + username + '"]').parent().hide();
+      $('#statements .statement[data-username!="' + username + '"]').parent().show();
   });
 </script>
