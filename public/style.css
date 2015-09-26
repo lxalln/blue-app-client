@@ -1,6 +1,6 @@
 header {
   width: 100%;
-  background-color: #A9F5D0;
+  background-color: #05abe0;
   height: 50px;
   border-bottom: 4px solid #F3F781;
   position: relative;
@@ -44,7 +44,7 @@ header {
   float: right;
   border-radius: 2px;
   width: 30px;
-  height: 20px; 
+  height: 20px;
   background: #F3F781;
   text-align: center;
 }

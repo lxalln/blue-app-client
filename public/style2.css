@@ -16,6 +16,15 @@
 }
 .add-friend-selected { color: #A9F5D0; cursor:pointer; }
 
+.menu-wrapper {
+  width:100%;
+  position:absolute;
+  text-align: center;
+  font-size: 2.8rem;
+  margin-top: 7px;
+  color:white;
+}
+
 .profile-pic {
   background-image:url(images/profiles/questionmark.jpg);
   border-radius: 50%;
@@ -49,4 +58,8 @@
   background: -ms-linear-gradient(-45deg, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* IE10+ */
   background: linear-gradient(135deg, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.menu-home {
+  margin:0px 30px;
 }
