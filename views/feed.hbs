@@ -73,7 +73,7 @@
 
             console.log('Connected as ' + username);
 
-            blueApp.server.sendToUser(username, 'server', 'init');
+            //blueApp.server.sendToUser(username, 'server', 'init');
 
             $('#sendmessage').click(function () {
                 var sendTo = $('#sendto').val();
@@ -133,19 +133,19 @@
 
 <div style="display:none">
     <div id="statement-template" class="statement">
-      <a class="media" href="/send-reaction/{{this.id}}">
+      <a class="media" href="/send-reaction/{{id}}">
         <div class="media-left">
           <div class="media-object"></div>
         </div>
         <div class="media-body">
-          <p>{{this.message}}</p>
+          <p>{{message}}</p>
         </div>
-        {{#if this.emojiCount}}
+        {{#if emojiCount}}
           <div class="has-emoji">
             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
           </div>
         {{/if}}
-        {{#if this.messageCount}}
+        {{#if messageCount}}
           <div class="has-message">
             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
           </div>
