@@ -20,10 +20,10 @@
             $.ajax({
               type: "POST",
               url: '/react',
-              data: JSON.stringify({
+              data: {
                   type: type,
                   data: message
-              }),
+              },
               success: function(){
                   console.log('success');
               },
