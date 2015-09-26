@@ -47,8 +47,8 @@ signalR.hub('blueApp',{
             state.statements.unshift(statement);
 
             message = {
-                type = 'statement',
-                statement = statement
+                type: 'statement',
+                statement: statement
             }
         }
 
