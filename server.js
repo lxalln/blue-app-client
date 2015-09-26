@@ -105,7 +105,7 @@ app.post('/react', function(req, res){
 
 	var statement;
 	for(var i = 0; i < state.statements.length; i++){
-		var loopingStatement = statements[i];
+		var loopingStatement = state.statements[i];
 
 		console.log('Comparing: ');
 		console.log(loopingStatement);
