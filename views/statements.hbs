@@ -37,12 +37,10 @@
   $(function () {
       var username = store.get('username');
 
-      var usernameSelector = $('#reactions .statement[data-username="' + username + '"]')
-      usernameSelector.show();
-      usernameSelector.not().hide();
+      $('#reactions .statement[data-username="' + username + '"]').show();
+      $('#reactions .statement[data-username!="' + username + '"]').hide();
 
-      var othersSelector = $('#statements .statement[data-username="' + username + '"]')
-      othersSelector.hide();
-      othersSelector.not().show();
+      $('#statements .statement[data-username="' + username + '"]').hide();
+      $('#statements .statement[data-username!="' + username + '"]').show();
   });
 </script>
