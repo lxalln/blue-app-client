@@ -21,6 +21,7 @@
     "express-handlebars": "^2.0.1"
   },
   "dependencies": {
+    "body-parser": "^1.14.0",
     "bootstrap": "^3.3.5",
     "signalrjs": "^0.2.2"
   }
