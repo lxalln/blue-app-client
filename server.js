@@ -118,7 +118,7 @@ app.post('/react', function(req, res){
 
 	if(statement){
 		if(type == 'emoji'){
-			if(!statement.encouragements){
+			if(typeof(statement.encouragements) === 'undefined'){
 				statement.encouragements = [];
 			}
 
@@ -126,7 +126,7 @@ app.post('/react', function(req, res){
 			statement.emoji.push(data);
 		}
 		else if (type == 'encouragement'){
-			if(!statement.encouragements){
+			if(typeof(statement.encouragements) === 'undefined'){
 				statement.encouragements = [];
 			}
 
@@ -134,7 +134,7 @@ app.post('/react', function(req, res){
 			statement.encouragements.push(data);
 		}
 		else{
-			if(!statement.messages){
+			if(typeof(statement.messages) === 'undefined'){
 				statement.messages = [];
 			}
 
