@@ -94,9 +94,9 @@ app.get('/client', function(req,res) {
 
 app.post('/react', function(req, res){
     console.log('received reaction');
-    console.log(res.body);
-    console.log(res.body.type);
-    console.log(res.body.data);
+    console.log(req.body);
+    console.log(req.body.type);
+    console.log(req.body.data);
 });
 
 require('./controller/sign-in.js')(app);
