@@ -26,11 +26,10 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-   function fbLogout() {
-       FB.logout(function (response) {
-           //Do what ever you want here when logged out like reloading the page
-           window.location.reload();
-       });
+   function logout() {
+       store.remove('username');
+       //Do what ever you want here when logged out like reloading the page
+       window.location = '/';
    }
 
 </script>
