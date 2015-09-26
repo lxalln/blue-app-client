@@ -32,6 +32,9 @@ module.exports = function(app)
                   });
               }
 
+              console.log('emojiHash');
+              console.log(hash);
+
               statement.emojiHash = hash;
           }
 
