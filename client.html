@@ -4,6 +4,7 @@
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js" type="text/javascript"></script>
+    <script src="https://raw.githubusercontent.com/marcuswestin/store.js/master/store.min.js"></script>
     <script src="signalr/hubs"></script>
     <script type="text/javascript">
         function renderStatement(statement, container, prepend){
@@ -25,6 +26,19 @@
 
         $(function () {
             $('#message-box').hide();
+            
+            var state = store.get('state');
+
+            if(!state){
+                store.set('state', {
+                    userName: '',
+                    statements: []
+                });
+            }
+            else{
+                console.log(state);
+            }
+
             console.log('Connecting to blueApp');
 
             //Create hub connection
@@ -41,8 +55,12 @@
 
                 var type = message.type;
 
+                var state = store.get('state');
+
                 if(fromUserName == 'server' && type == 'init'){
                     var statements = message.statements;
+
+                    state.statements = statements;
 
                     for(var i = 0; i < statements.length; i++){
                         var statement = statements[i];
@@ -54,12 +72,15 @@
                     if(type == 'statement'){
                         var statement = message.statement;
 
+                        state.statements.unshift(statement);
+
                         renderStatement(statement, statementsBox, true);
                     }
                 }
+
+                store.set('state', state);
             };
 
-            //connection.url = 'http://blue-app-server.azurewebsites.net/signalr';
             console.log(connection.url);
 
             $('#connect').click(function(){
