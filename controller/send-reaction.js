@@ -1,13 +1,11 @@
 var logger     = require('../modules/Logger');
-var store      = require('../public/scripts/store.min.js');
+var state = require('./modules/state');
 
 module.exports = function(app)
 {
     app.get('/send-reaction/:id', function(req, res) {
 
         var id = req.params.id;
-
-        var state = store.get('state');
 
         if(!state){
             res.status(404)        // HTTP status 404: NotFound

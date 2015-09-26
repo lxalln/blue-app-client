@@ -3,6 +3,8 @@ var app     = express();
 var SignalRJS = require('signalrjs');
 var http = require('http').Server(app);
 
+var state = require('./modules/state');
+
 var exphbs      = require('express-handlebars');
 var helpers = require('./modules/helpers');
 
@@ -40,24 +42,6 @@ signalR.poll = function(req,res){
 			transport.send(connection.connection,[]);
 	},30000);
 };
-
-var state = {
-    type: 'init',
-    statements: [
-        {
-            Id : generateUUID(),
-            Message : "Test statement A",
-            User : "user1",
-            Timestamp: new Date()
-        },
-        {
-            Id : generateUUID(),
-            Message : "Test statement B",
-            User: "user2",
-            Timestamp: new Date(new Date().getTime() + (20*60*1000))
-        }
-    ]
-}
 
 //Create the hub connection
 //NOTE: Server methods are defined as an object on the second argument
