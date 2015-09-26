@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<section id="reactions" style="display:none;">
+<section id="reactions">
   <div class="reactions">
   {{#each statements}}
     {{> reaction}}
@@ -37,11 +37,11 @@
   $(function () {
       var username = store.get('username');
 
-      var usernameSelector = $('#reactions .statement[data-username=' + username + ']')
+      var usernameSelector = $('#reactions .statement[data-username="' + username + '"]')
       usernameSelector.show();
       usernameSelector.not().hide();
 
-      var othersSelector = $('#statements .statement[data-username=' + username + ']')
+      var othersSelector = $('#statements .statement[data-username="' + username + '"]')
       othersSelector.hide();
       othersSelector.not().show();
   });
