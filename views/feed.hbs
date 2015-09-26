@@ -19,7 +19,8 @@
     }
 
     $(function () {
-        $('#message-box').hide();
+
+        var username = store.get('username');
 
         console.log('Connecting to blueApp');
 
@@ -67,8 +68,7 @@
                 $('#connect-box').hide();
                 $('#message-box').show();
 
-                var userName = $('#username').val();
-                $.connection.$user(userName);
+                $.connection.$user(username);
 
                 console.log('Connected as ' + userName);
 
