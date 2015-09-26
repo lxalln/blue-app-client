@@ -1,3 +1,23 @@
+<script type="text/javascript">
+$(function () {
+    var username = store.get('username');
+
+    if(username){
+        window.location="/import";
+    }
+
+    $('#start-journey').click(function(){
+        var username = $('#username').val();
+        if(username){
+            store.set('username', username);
+            window.location="/import";
+        }
+    });
+});
+</script>
+
 <div class="splash">
-  <a type="button" class="btn btn-primary" href="/import">Start your journey</a>
+    <input type="text" id="username" class="form-control"/>
+    <a id="start-journey" type="button" class="btn btn-primary" href="/import">Start your journey</a>
+</div>
 </div>
