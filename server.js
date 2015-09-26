@@ -68,7 +68,14 @@ app.use(signalR.createListener());
 
 // end signalR server
 
-app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'main', helpers:helpers}));
+app.engine('.hbs', exphbs({
+    extname: '.hbs',
+    defaultLayout: 'main',
+    helpers:helpers,
+    partialsDir: [
+        'views/partials/'
+    ]
+}));
 app.set('view engine', '.hbs');
 
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
