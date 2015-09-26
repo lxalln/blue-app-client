@@ -83,6 +83,7 @@ require('./controller/import.js')(app);
 require('./controller/send-reaction.js')(app);
 require('./controller/filter.js')(app);
 require('./controller/feed.js')(app);
+require('./controller/statements.js')(app);
 var port = process.env.port || 5000;
 
 http.listen(port, function(){

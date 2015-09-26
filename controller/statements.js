@@ -3,7 +3,7 @@ var state = require('../modules/state');
 
 module.exports = function(app)
 {
-    app.get('/feed', function(req, res) {
+    app.get('/statements', function(req, res) {
       function filterData(statements) {
         for (var i = 0, x = statements.length; i < x; i++) {
           if(statements[i].emojiCount > 3) {
@@ -26,6 +26,6 @@ module.exports = function(app)
         statements: state.statements
       };
 
-      res.render('feed', data);
+      res.render('statements', data);
     });
 };
