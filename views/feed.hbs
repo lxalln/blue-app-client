@@ -2,6 +2,7 @@
 <script src="signalr/hubs"></script>
 <script type="text/javascript">
     function renderStatement(statement, container, prepend){
+        console.log('Rendering');
         console.log(statement);
 
         var source   = $("#statement-template").html();
@@ -131,8 +132,8 @@
   {{/each}}
 </div>
 
-<div style="display:none">
-    <div id="statement-template" class="statement">
+<div style="display:none" id="statement-template">
+    <div class="statement">
       <a class="media" href="/send-reaction/{{id}}">
         <div class="media-left">
           <div class="media-object"></div>
