@@ -42,10 +42,15 @@ signalR.hub('blueApp',{
         if(json.type == 'statement'){
             var statement = json.statement;
 
-            statement.id = helpers.generateUUID();
+            var newId = helpers.generateUUID();
+            statement.id = newId;
 
             state.statements.unshift(statement);
+
+            json.statement.id = newId;
         }
+
+        message = JSON.stringify(json);
 
 		this.clients.all.invoke('onTransmit').withArgs([fromUserName,message]);
 		console.log('broadcasting:'+message);

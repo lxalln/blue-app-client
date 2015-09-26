@@ -28,7 +28,7 @@
         if (typeof(my_friends) !== 'undefined') {
           $('#my_friends').html = '';
           $.each(my_friends['friends'], function( index, value ) {
-              $('#my_friends').append('<li class="list-group-item" id="li-'+value['id']+'"><div class="profile-pic" style="background-image:url(images/profiles/'+value['picture']+')"></div><div class="add-friend glyphicon glyphicon-plus-sign" onclick="addFriend('+value['id']+');" id="'+value['id']+'"></div><div class="profile-name">'+value['firstName']+' ' +value['lastName'] + '</div><div class="clear"</div></li>');
+              $('#my_friends').append('<li class="list-group-item" id="li-'+value['id']+'" onclick="addFriend('+value['id']+');"><div class="profile-pic" style="background-image:url(images/profiles/'+value['picture']+')"></div><div class="add-friend glyphicon glyphicon-plus-sign" id="'+value['id']+'"></div><div class="profile-name">'+value['firstName']+' ' +value['lastName'] + '</div><div class="clear"</div></li>');
           });
         }
       //});
@@ -44,7 +44,6 @@
    }(document, 'script', 'facebook-jssdk'));
 
    function addFriend(id) {
-     console.log(id);
      if ($('#'+id).hasClass('add-friend-selected')) {
        //TODO Doesn't work yet, made some stupid mistake that i dont recall now
        $('#'+id).removeClass('add-friend-selected');

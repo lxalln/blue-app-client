@@ -2,13 +2,18 @@
 <script src="signalr/hubs"></script>
 <script type="text/javascript">
     function renderStatement(statement, container, prepend){
-        console.log(statement);
+        console.log('Rendering');
 
-        var html = '<h1><a href="/send-reaction/' + statement["Id"] + '">' + statement["Message"] + '</a></h1>';
-        html += '<h3>' + statement["User"] + '</h3>';
-        html += '<h5>' + statement["Timestamp"] + '</h5>';
-        html += '</hr>';
-        html += '</br>';
+        var source   = $("#statement-template").html();
+        var template = Handlebars.compile(source);
+
+console.log(template);
+console.log(statement);
+        var html = template({
+            "message" : "TESTING!"
+        });
+
+        console.log(html);
 
         if(prepend){
             container.prepend(html);
@@ -68,13 +73,13 @@
 
             $('#connect-box').hide();
             $('#message-box').show();
-            $('#broadcastMessage').prop('value', 'Tell your story');
+            $('#broadcastMessage').val('Tell your story');
 
             $.connection.$user(username);
 
             console.log('Connected as ' + username);
 
-            blueApp.server.sendToUser(username, 'server', 'init');
+            //blueApp.server.sendToUser(username, 'server', 'init');
 
             $('#sendmessage').click(function () {
                 var sendTo = $('#sendto').val();
@@ -122,12 +127,35 @@
 <div class="message">
   <div class="form-group">
     <input id="message" type="text" class="form-control">
-    <button id='broadcastMessage' type="submit" class="btn btn-primary">Tell your story</button>
+    <input id='broadcastMessage' type="submit" class="btn btn-primary" value='Connecting...'/>
   </div>
 </div>
 
-<div class="statements">
+<div id='statements-box' class="statements">
   {{#each statements}}
     {{> statement}}
   {{/each}}
+</div>
+
+<div style="display:none" id="statement-template">
+    <div class="statement">
+      <a class="media" href="/send-reaction/{{id}}">
+        <div class="media-left">
+          <div class="media-object"></div>
+        </div>
+        <div class="media-body">
+          <p>{{message}}</p>
+        </div>
+        {{#if emojiCount}}
+          <div class="has-emoji">
+            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+          </div>
+        {{/if}}
+        {{#if messageCount}}
+          <div class="has-message">
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+          </div>
+        {{/if}}
+        </a>
+    </div>
 </div>
