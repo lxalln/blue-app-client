@@ -17,9 +17,13 @@ module.exports = function(app)
 
         var statements = state.statements;
 
+        console.log('Looking for Id: ' + id);
         var statement;
         for(var i = 0; i < statements.length; i++){
             var loopingStatement = statements[i];
+
+            console.log('Comparing: ');
+            console.log(loopingStatement);
 
             if(loopingStatement.id == id){
                 statement = loopingStatement;
