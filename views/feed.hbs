@@ -9,7 +9,9 @@
 
 console.log(template);
 console.log(statement);
-        var html = template(statement);
+        var html = template({
+            "message" : "TESTING!"
+        });
 
         console.log(html);
 
@@ -137,12 +139,12 @@ console.log(statement);
 
 <div style="display:none" id="statement-template">
     <div class="statement">
-      <a class="media" href="/send-reaction/{{statement.id}}">
+      <a class="media" href="/send-reaction/{{id}}">
         <div class="media-left">
           <div class="media-object"></div>
         </div>
         <div class="media-body">
-          <p>{{this.message}}</p>
+          <p>{{message}}</p>
         </div>
         {{#if emojiCount}}
           <div class="has-emoji">
