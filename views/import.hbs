@@ -1,18 +1,19 @@
 
 
-<a href="https://www.facebook.com/dialog/oauth?client_id=941121332608123&redirect_uri=http://blueapp.dev:5000/filter&auth_type=rerequest&scope=user_friends">login</a>
+<section id="filter-btns">
+  <h2>Import your Friends:</h2>
+  <hr/>
+  <!-- NOTE If everything blows up here, you can just route to /filter and delete the condition about FB SignIn Stuff -->
+  <a class="btn btn-primary btn-import" href="https://www.facebook.com/dialog/oauth?client_id=941121332608123&redirect_uri=http://blueapp.dev:5000/filter&auth_type=rerequest&scope=user_friends">Facebook</a>
+  <a class="btn btn-danger btn-import" href="http://www.google.de/">Google</a>
+</section>
 
-
+<!-- NOTE This is just for testing purpuses -->
+<hr/>
+Just for testing purpuses:<br/>
 <span id="fbLogout" onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout</span></a></span>
 
 <script>
-
-  function fbLogout() {
-      FB.logout(function (response) {
-          //Do what ever you want here when logged out like reloading the page
-          window.location.reload();
-      });
-  }
 
   //Connect to Facebook asynchroniously
   window.fbAsyncInit = function() {
@@ -29,5 +30,12 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+
+   function fbLogout() {
+       FB.logout(function (response) {
+           //Do what ever you want here when logged out like reloading the page
+           window.location.reload();
+       });
+   }
 
 </script>

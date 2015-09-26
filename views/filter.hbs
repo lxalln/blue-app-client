@@ -32,12 +32,8 @@
         };
         if (typeof(my_friends) !== 'undefined') {
           $('#my_friends').html = '';
-          //console.log(my_friends);
           $.each(my_friends['friends'], function( index, value ) {
-            //$.each( value, function( key, val ) {
-              console.log(value);
               $('#my_friends').append('<li id="'+value['id']+'">'+value['firstName']+' ' +value['lastName'] + '</li>');
-            //});
           });
         }
       });
