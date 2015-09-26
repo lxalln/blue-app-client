@@ -67,7 +67,7 @@
 
             $('#connect-box').hide();
             $('#message-box').show();
-            $('#broadcastMessage').prop('value', 'Tell your story');
+            $('#broadcastMessage').val('Tell your story');
 
             $.connection.$user(username);
 
@@ -125,7 +125,7 @@
   </div>
 </div>
 
-<div class="statements">
+<div id='#statements-box' class="statements">
   {{#each statements}}
     {{> statement}}
   {{/each}}
