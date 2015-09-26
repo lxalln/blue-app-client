@@ -1,31 +1,51 @@
 var logger = require('../modules/Logger');
-var state = require('../modules/state');
 
-module.exports = function(app)
-{
-    app.get('/statements', function(req, res) {
-      function filterData(statements) {
-        for (var i = 0, x = statements.length; i < x; i++) {
-          if(statements[i].emojiCount > 3) {
-            statements[i].emojiCount = true;
-          } else {
-            statements[i].emojiCount = false;
-          }
 
-          if(statements[i].messageCount > 3) {
-            statements[i].messageCount = true;
-          } else {
-            statements[i].messageCount = false;
-          }
-        }
-      }
-
-      filterData(state.statements);
+module.exports = function(app) {
+      app.get('/statements', function(req, res) {
 
       var data = {
-        statements: state.statements
+        statements: [ {
+        id: 'Dallas',
+        message: 'I had a bad mood after work...',
+        emojiCount: '2',
+        messageCount: '4'},
+        {id: 'Dallas',
+        message: 'This day i was at the hospital with my father. It was okay...',
+        emojiCount: '5',
+        messageCount: '4'}
+      ],
+      reactions: [ {
+        id: 'Dallas',
+        message: 'I had a bad mood after work...',
+        emojiCount: '2',
+        messageCount: '4'},
+        {id: 'Dallas',
+        message: 'This day i was at the hospital with my father. It was okay...',
+        emojiCount: '5',
+        messageCount: '4'}
+        ]
       };
 
-      res.render('statements', data);
-    });
+
+        res.render('statements', data);
+  });
 };
+
+/*
+statement2: { statement: 'Today im kind a feeling a little blueish since i have the new work..',
+emojis: [
+  {name: 'heart', image: 'images/heart.png', count: 2},
+  {name: 'panda', image: 'images/panda.png', count: 3},
+  {name: 'fistbump', image: 'images/fistbump.png', count: 0}
+],
+encouragements: [
+  {value: 'I know how you feel', count: 4},
+  {value: 'Heads up!', count: 2},
+  {value: 'Stay strong!', count: 7}
+],
+messages: [
+  {value: 'I was in the same situation one month ago...', sender: ''},
+]}
+}
+*/

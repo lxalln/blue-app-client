@@ -1,4 +1,42 @@
+<script type="text/javascript">
+
+    $(function () {
+        var statementId = $('#statement-id').val();
+
+        $('[data-type]').click(function(){
+            var type = $(this).data('type');
+            var message;
+
+            if(type == 'emoji'){
+                message = $(this).data('name');
+            }
+            else if(type == 'encouragement'){
+                message = $(this).innerHtml();
+            }
+            else{
+                message = $('#reaction-message').val();
+            }
+
+            $.ajax({
+              type: "POST",
+              url: '/react',
+              data: JSON.stringify({
+                  type: type,
+                  data: message
+              }),
+              success: function(){
+                  console.log('success');
+              },
+              dataType: 'json'
+            });
+
+            window.location = '/feed'
+        });
+    });
+</script>
+
 <div class="statement">
+    <input id="statement-id" type="hidden" value="{{statement.id}}"/>
   <div class="media">
     <div class="media-left">
       <div class="media-object"></div>
@@ -12,20 +50,20 @@
 <div class="emoji-reactions">
   {{#each emojis}}
   <div class="emoji-reaction">
-    <img class="emoji-reaction-icon" src="{{this.image}}" alt="heart">
+    <img class="emoji-reaction-icon" src="{{this.image}}" alt="heart" data-name="{{this.name}}" data-type="emoji">
   </div>
   {{/each}}
 </div>
 
 <div class="encouragements">
   {{#each encouragements}}
-  <div class="encouragement">{{this}}</div>
+  <div class="encouragement" data-type="encouragement">{{this}}</div>
   {{/each}}
 </div>
 
 <div class="message">
   <div class="form-group">
-    <input type="text" class="form-control">
-    <button type="submit" class="btn btn-default">Add your message</button>
+    <input id="reaction-message" type="text" class="form-control">
+    <button type="submit" class="btn btn-default" data-type="input">Add your message</button>
   </div>
 </div>
