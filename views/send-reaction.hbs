@@ -24,7 +24,9 @@
                   type: type,
                   data: message
               }),
-              success: success,
+              success: function(){
+                  console.log('success');
+              },
               dataType: dataType
             });
 
