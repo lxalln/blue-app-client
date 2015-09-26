@@ -94,8 +94,39 @@ module.exports = function(app)
     }
 
 filterData(state.statements);
-    app.get('/statement', function(req, res) {
+    app.get('/statement/:id', function(req, res) {
+        var id = req.params.id;
 
-      res.render('statement', state.statements);
+        console.log(state);
+
+        if(!state){
+            res.status(404)        // HTTP status 404: NotFound
+            .send('Not found');
+            return;
+        }
+
+        var statements = state.statements;
+
+        console.log('Looking for Id: ' + id);
+        var statement;
+        for(var i = 0; i < statements.length; i++){
+            var loopingStatement = statements[i];
+
+            console.log('Comparing: ');
+            console.log(loopingStatement);
+
+            if(loopingStatement.id == id){
+                statement = loopingStatement;
+                break;
+            }
+        }
+
+      if(!statement){
+          res.status(404)        // HTTP status 404: NotFound
+          .send('Statement not found');
+          return;
+      }
+
+      res.render('statement', statement);
     });
 };
