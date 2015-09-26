@@ -3,12 +3,13 @@ var app     = express();
 var SignalRJS = require('signalrjs');
 var http = require('http').Server(app);
 
+var state = require('./modules/state');
+
 var exphbs      = require('express-handlebars');
 var helpers = require('./modules/helpers');
 
 var config      = require('./modules/config');
 var logger      = require('./modules/Logger');
-
 
 // signalR server
 
@@ -32,22 +33,6 @@ signalR.poll = function(req,res){
 	},30000);
 };
 
-var state = {
-    type: 'init',
-    statements: [
-        {
-            Message : "Test statement A",
-            User : "user1",
-            Timestamp: new Date()
-        },
-        {
-            Message : "Test statement B",
-            User: "user2",
-            Timestamp: new Date(new Date().getTime() + (20*60*1000))
-        }
-    ]
-}
-
 //Create the hub connection
 //NOTE: Server methods are defined as an object on the second argument
 signalR.hub('blueApp',{
@@ -56,22 +41,24 @@ signalR.hub('blueApp',{
 
         if(json.type == 'statement'){
             var statement = json.statement;
+
+            statement.id = helpers.generateUUID();
+
             state.statements.unshift(statement);
         }
 
-		this.clients.all.invoke('onTransmit').withArgs([fromUserName,message])
+		this.clients.all.invoke('onTransmit').withArgs([fromUserName,message]);
 		console.log('broadcasting:'+message);
 	},
 	sendToUser : function(fromUserName, toUserName, message){
         if(toUserName == 'server' && message == 'init'){
             var stateString = JSON.stringify(state);
 
-            this.clients.user(fromUserName).invoke('onTransmit').withArgs(['server', stateString])
+            this.clients.user(fromUserName).invoke('onTransmit').withArgs(['server', stateString]);
         }
         else{
-            this.clients.user(toUserName).invoke('onTransmit').withArgs([fromUserName,message])
+            this.clients.user(toUserName).invoke('onTransmit').withArgs([fromUserName,message]);
         }
-
 		console.log('sendToUser from('+fromUserName+') to('+toUserName+') message:'+message);
 	}
 });
@@ -91,8 +78,12 @@ app.get('/client', function(req,res) {
   res.sendfile('client.html');
 });
 
+
 require('./controller/sign-in.js')(app);
+require('./controller/index.js')(app);
+require('./controller/import.js')(app);
 require('./controller/send-reaction.js')(app);
+require('./controller/filter.js')(app);
 require('./controller/feed.js')(app);
 require('./controller/chat.js')(app);
 require('./controller/statement.js')(app);

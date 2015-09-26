@@ -9,7 +9,7 @@
         function renderStatement(statement, container, prepend){
             console.log(statement);
 
-            var html = '<h1>' + statement["Message"] + '</h1>';
+            var html = '<h1><a href="/send-reaction/' + statement["Id"] + '">' + statement["Message"] + '</a></h1>';
             html += '<h3>' + statement["User"] + '</h3>';
             html += '<h5>' + statement["Timestamp"] + '</h5>';
             html += '</hr>';
@@ -25,6 +25,7 @@
 
         $(function () {
             $('#message-box').hide();
+
             console.log('Connecting to blueApp');
 
             //Create hub connection
@@ -54,12 +55,13 @@
                     if(type == 'statement'){
                         var statement = message.statement;
 
+                        state.statements.unshift(statement);
+
                         renderStatement(statement, statementsBox, true);
                     }
                 }
             };
 
-            //connection.url = 'http://blue-app-server.azurewebsites.net/signalr';
             console.log(connection.url);
 
             $('#connect').click(function(){

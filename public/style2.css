@@ -1,0 +1,40 @@
+#filter-btns {
+  text-align:center;
+}
+
+.btn-import {
+  font-size: 3rem;
+  padding: 6px 40px;
+  margin: 20px 0px 0px;
+}
+
+.add-friend {
+  float: right;
+  font-size: 6.4rem;
+  color:#5cb85c;
+  float: right;
+}
+
+.profile-pic {
+  background-image:url(images/profiles/questionmark.jpg);
+  border-radius: 50%;
+  width:64px;
+  height:64px;
+  background-position:50% 50%;
+  float: left;
+}
+
+.profile-name {
+  text-align:right;
+  float: right;
+  width: 50%;
+  margin-top: 0px;
+  font-size: 24px;
+  margin-right:10px;
+  height: 64px;
+  line-height: 64px;
+}
+
+.clear {
+  clear:both;
+}

@@ -1,0 +1,46 @@
+<ul id="my_friends" class="list-group">
+</ul>
+
+<a class="btn btn-default btn-import" href="/feed">Continue</a>
+
+<script>
+
+  //Connect to Facebook asynchroniously
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '941121332608123',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+
+    //FB.getLoginStatus(function(response) {
+    //if (response.status === 'connected') {
+      //FB.api('/me/friends', {fields: 'id,name'}, function(response) {
+        var my_friends = {
+          "friends":[
+              {"firstName":"John", "lastName":"Doe", "id":1001, "picture":"pic1.jpg" },
+              {"firstName":"Anna",	"lastName":"Smith", "id":1002, "picture":"pic2.jpg" },
+              {"firstName":"Peter", "lastName":"Jones", "id":1003, "picture":"questionmark.jpg" },
+              {"firstName":"Damon", "lastName":"Albarn", "id":1004, "picture":"pic3.jpg" },
+              {"firstName":"Mr.", "lastName":"Bean", "id":1005, "picture":"questionmark.jpg" }
+          ]
+        };
+        if (typeof(my_friends) !== 'undefined') {
+          $('#my_friends').html = '';
+          $.each(my_friends['friends'], function( index, value ) {
+              $('#my_friends').append('<li class="list-group-item" id="'+value['id']+'"><div class="profile-pic" style="background-image:url(images/profiles/'+value['picture']+')"></div><div class="add-friend glyphicon glyphicon-plus-sign"></div><div class="profile-name">'+value['firstName']+' ' +value['lastName'] + '</div><div class="clear"</div></li>');
+          });
+        }
+      //});
+    //}
+  //});
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+</script>
