@@ -85,11 +85,18 @@ app.set('view engine', '.hbs');
 
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use(express.static('public'));
+app.use(express.bodyParser());
 
 app.get('/client', function(req,res) {
   res.sendfile('client.html');
 });
 
+app.post('/react', function(req, res){
+    console.log('received reaction');
+    console.log(res.body);
+    console.log(res.body.type);
+    console.log(res.body.data);
+});
 
 require('./controller/sign-in.js')(app);
 require('./controller/import.js')(app);
