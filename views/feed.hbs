@@ -1,0 +1,24 @@
+<div class="statements">
+  {{#each statements}}
+    <div class="statement">
+      <div class="media">
+        <div class="media-left">
+          <div class="media-object"></div>
+        </div>
+        <div class="media-body">
+          <p>{{this.statement}}</p>
+        </div>
+        {{#if this.emojiCount}}
+          <div class="emoji-count">
+            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+          </div>
+        {{/if}}
+        {{#if this.messageCount}}
+          <div class="message-count">
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  {{/each}}
+</div>
