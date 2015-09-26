@@ -45,6 +45,11 @@ signalR.hub('blueApp',{
             statement.id = helpers.generateUUID();
 
             state.statements.unshift(statement);
+
+            message = {
+                type = 'statement',
+                statement = statement
+            }
         }
 
 		this.clients.all.invoke('onTransmit').withArgs([fromUserName,message]);
