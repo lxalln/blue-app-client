@@ -9,21 +9,82 @@ var helpers = require('./modules/helpers');
 var config      = require('./modules/config');
 var logger      = require('./modules/Logger');
 
+function generateUUID() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+};
 
 // signalR server
 
 // Init SignalRJs
 var signalR = SignalRJS();
 
+// hack hack hack!
+
+signalR.poll = function(req,res){
+	var self = this;
+	var token = req.signalrjs.token;
+	this._connectionManager.updateConnection(req.signalrjs.token,res);
+	setTimeout(function(){
+		var connection = self._connectionManager.getByToken(token);
+        if(typeof(connection) === 'undefined'){
+            return;
+        }
+		var transport = self._transports[connection.type];
+		if(transport)
+			transport.send(connection.connection,[]);
+	},30000);
+};
+
+var state = {
+    type: 'init',
+    statements: [
+        {
+            Id : generateUUID(),
+            Message : "Test statement A",
+            User : "user1",
+            Timestamp: new Date()
+        },
+        {
+            Id : generateUUID(),
+            Message : "Test statement B",
+            User: "user2",
+            Timestamp: new Date(new Date().getTime() + (20*60*1000))
+        }
+    ]
+}
+
 //Create the hub connection
 //NOTE: Server methods are defined as an object on the second argument
 signalR.hub('blueApp',{
     broadcast : function(fromUserName, message){
-		this.clients.all.invoke('broadcast').withArgs([fromUserName,message]);
+        var json = JSON.parse(message);
+
+        if(json.type == 'statement'){
+            var statement = json.statement;
+
+            statement.Id = generateUUID();
+
+            state.statements.unshift(statement);
+        }
+
+		this.clients.all.invoke('onTransmit').withArgs([fromUserName,message])
 		console.log('broadcasting:'+message);
 	},
 	sendToUser : function(fromUserName, toUserName, message){
-		this.clients.user(toUserName).invoke('onPrivateMessage').withArgs([fromUserName,message]);
+        if(toUserName == 'server' && message == 'init'){
+            var stateString = JSON.stringify(state);
+
+            this.clients.user(fromUserName).invoke('onTransmit').withArgs(['server', stateString])
+        }
+        else{
+            this.clients.user(toUserName).invoke('onTransmit').withArgs([fromUserName,message])
+        }
 		console.log('sendToUser from('+fromUserName+') to('+toUserName+') message:'+message);
 	}
 });
@@ -40,17 +101,18 @@ app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use(express.static('public'));
 
 app.get('/client', function(req,res) {
-  res.sendFile('client.html');
+  res.sendfile('client.html');
 });
 
 require('./controller/index.js')(app);
 require('./controller/import.js')(app);
 require('./controller/send-reaction.js')(app);
 require('./controller/filter.js')(app);
+require('./controller/feed.js')(app);
+var port = process.env.port || 5000;
 
-
-http.listen('5000', function(){
-  logger.pipe('Server started via "http" and listening on 5000.', 'success');
+http.listen(port, function(){
+  logger.pipe('Server started via "http" and listening on ' + port, 'success');
 });
 
 signalR.on('CONNECTED',function(){

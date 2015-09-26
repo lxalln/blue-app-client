@@ -4,7 +4,7 @@ module.exports = function(app)
 {
     app.get('/send-reaction', function(req, res) {
       var statement = {
-        image: 'images/profile-pic.jpg',
+        image: '',
         statement: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.'
       };
 
