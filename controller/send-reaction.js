@@ -2,11 +2,35 @@ var logger     = require('../modules/Logger');
 
 module.exports = function(app)
 {
-    app.get('/send-reaction', function(req, res) {
-      var statement = {
-        image: '',
-        statement: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.'
-      };
+    app.get('/send-reaction/:id', function(req, res) {
+
+        var id = req.params.id;
+
+        var state = store.get('state');
+
+        if(!state){
+            res.status(404)        // HTTP status 404: NotFound
+            .send('Not found');
+            return;
+        }
+
+        var statements = state.statements;
+
+        var statement;
+        for(var i = 0; i < statements.length; i++){
+            var loopingStatement = statements[i];
+
+            if(loopingStatement.id == id){
+                statement = loopingStatement;
+                break;
+            }
+        }
+
+      if(!statement){
+          res.status(404)        // HTTP status 404: NotFound
+          .send('Not found');
+          return;
+      }
 
       var emojis = [
         // TODO: add more emojis
